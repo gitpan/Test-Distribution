@@ -3,7 +3,20 @@ NAME
 
 SYNOPSIS
       $ cat t/01distribution.t
-      use Test::Distribution;
+      use Test::More;
+
+      BEGIN {
+            eval {
+                    require Test::Distribution;
+            };
+            if($@) {
+                    plan skip_all => 'Test::Distribution not installed';
+            }
+            else {
+                    import Test::Distribution;
+            }
+       }
+
       $ make test
       ...
 
@@ -11,6 +24,12 @@ DESCRIPTION
     When using this module in a test script, it goes through all the modules
     in your distribution, checks their POD, checks that they compile ok and
     checks that they all define the same $VERSION.
+
+    This module also performs a numer of test on the distribution itself. It
+    checks that your files match your SIGNATURE file if you have one. It
+    checks that your distribution isn't missing certain 'core' description
+    files. It checks to see you havent' missed out listing any
+    pre-requisites in Makefile.PL.
 
     It defines its own testing plan, so you usually don't use it in
     conjunction with other "Test::*" modules in the same file. It's
@@ -73,15 +92,6 @@ OPTIONS
 TEST TYPES
     Here is a description of the types of tests available.
 
-    "pod"
-        Checks for POD errors in files
-
-    "use"
-        This "use()"s the modules to make sure the load happens ok.
-
-    "versions"
-        Checks that all packages define $VERSION strings.
-
     "description"
         Checks that the following files exist:
 
@@ -93,6 +103,19 @@ TEST TYPES
     "prereq"
         Checks whether all "use()"d modules that aren't in the perl core are
         also mentioned in Makefile.PL's "PREREQ_PM".
+
+    "pod"
+        Checks for POD errors in files
+
+    "sig"
+        If the distribution has a SIGNATURE file, checks the SIGNATURE
+        matches the files.
+
+    "use"
+        This "use()"s the modules to make sure the load happens ok.
+
+    "versions"
+        Checks that all packages define $VERSION strings.
 
 EXPOSED INTERNALS
     There are a few subroutines to help you see what this module is doing.
@@ -138,8 +161,6 @@ DEPENDENCIES
      File::Spec
      Test::More
 
-    "Test::More" is only required for testing purposes.
-
     This module has these optional dependencies:
 
      Module::CoreList
@@ -147,12 +168,17 @@ DEPENDENCIES
 
     If "Module::CoreList" is missing, the "prereq" tests are skipped.
 
-    If <Test::Pod> is missing, the "pod" tests are skipped.
+    If "Test::Pod" is missing, the "pod" tests are skipped.
 
 TODO
     Just because these items are in the todo list, does not mean they will
     actually be done. If you think one of these would be helpful say so -
     and it will then move up on my priority list.
+
+    *   Include an example of a 01distribution.t that only uses
+        Test::Distribution if it is installed. This way module authors do
+        not need to make it a required module. [use a variant of the require
+        method .. .see man perlfunc: require]
 
     *   Module::Build support
 
@@ -182,15 +208,14 @@ BUGS
 
     bug-test-distribution@rt.cpan.org
 
-AUTHOR
+AUTHORS
     Marcel Grünauer <marcel@cpan.org>
 
-MAINTAINER
     Sagar R. Shah
 
 OTHER CREDITS
     This module was inspired by a use.perl.org journal entry by "brian d
-    foy" (see http://use.perl.org/~brian_d_foy/journal/7463) where he
+    foy" (see <http://use.perl.org/~brian_d_foy/journal/7463>) where he
     describes an idea by Andy Lester.
 
 COPYRIGHT
@@ -202,5 +227,6 @@ COPYRIGHT
     under the same terms as Perl itself.
 
 SEE ALSO
-    perl(1), Test::More(3pm), Test::Pod(3pm), File::Find::Rule(3pm).
+    perl(1), File::Find::Rule(3pm), Test::More(3pm), Test::Pod(3pm),
+    Test::Signature(3pm).
 

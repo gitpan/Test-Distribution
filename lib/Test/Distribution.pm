@@ -4,10 +4,10 @@ use strict;
 use warnings;
 use Test::More;
 
-our $VERSION = '1.07';
+our $VERSION = '1.08';
 
 # our @types = qw/pod use versions description manifest prereq exports/;
-our @types = qw/use versions prereq pod description/;
+our @types = qw/sig use versions prereq pod description/;
 
 my @error;
 for (qw/File::Spec File::Basename File::Find::Rule/) {
@@ -283,6 +283,29 @@ sub run_tests {
 }
 
 
+package Test::Distribution::sig;
+use Test::More;
+our @ISA = 'Test::Distribution::base';
+
+sub num_tests {
+	return (-f 'SIGNATURE') ? 1 : 0;
+}
+
+sub run_tests{
+	my $self = shift;
+	return unless $self->num_tests();
+	eval {
+		require Test::Signature;
+		Test::Signature->import;
+	};
+	if($@) {
+		skip 'Test::Signature required for this test', $self->num_tests();
+	}
+	else {
+		signature_ok();
+	}
+}
+
 1;
 
 __END__
@@ -294,7 +317,20 @@ Test::Distribution - perform tests on all modules of a distribution
 =head1 SYNOPSIS
 
   $ cat t/01distribution.t
-  use Test::Distribution;
+  use Test::More;
+
+  BEGIN {
+	eval {
+		require Test::Distribution;
+	};
+	if($@) {
+		plan skip_all => 'Test::Distribution not installed';
+	}
+	else {
+		import Test::Distribution;
+	}
+   }
+
   $ make test
   ...
 
@@ -303,6 +339,11 @@ Test::Distribution - perform tests on all modules of a distribution
 When using this module in a test script, it goes through all the modules
 in your distribution, checks their POD, checks that they compile ok and
 checks that they all define the same $VERSION.
+
+This module also performs a numer of test on  the distribution itself. It checks
+that your files match your  SIGNATURE file if you  have one. It checks that your
+distribution  isn't missing certain 'core'  description files.  It checks to see
+you havent' missed out listing any pre-requisites in Makefile.PL.
 
 It defines its own testing plan, so you usually don't use it in
 conjunction with other C<Test::*> modules in the same file. It's
@@ -374,18 +415,6 @@ Here is a description of the types of tests available.
 
 =over 4
 
-=item C<pod>
-
-Checks for POD errors in files
-
-=item C<use>
-
-This C<use()>s the modules to make sure the load happens ok.
-
-=item C<versions>
-
-Checks that all packages define C<$VERSION> strings.
-
 =item C<description>
 
 Checks that the following files exist:
@@ -406,6 +435,23 @@ Checks that the following files exist:
 
 Checks whether all C<use()>d modules that aren't in the perl core are
 also mentioned in Makefile.PL's C<PREREQ_PM>.
+
+=item C<pod>
+
+Checks for POD errors in files
+
+=item C<sig>
+
+If the distribution   has a SIGNATURE  file, checks  the  SIGNATURE matches  the
+files.
+
+=item C<use>
+
+This C<use()>s the modules to make sure the load happens ok.
+
+=item C<versions>
+
+Checks that all packages define C<$VERSION> strings.
 
 =back
 
@@ -463,8 +509,6 @@ This module requires these other modules and libraries:
  File::Spec
  Test::More
 
-C<Test::More> is only required for testing purposes.
-
 This module has these optional dependencies:
 
  Module::CoreList
@@ -472,7 +516,7 @@ This module has these optional dependencies:
 
 If C<Module::CoreList> is missing, the C<prereq> tests are skipped.
 
-If <Test::Pod> is missing, the C<pod> tests are skipped.
+If C<Test::Pod> is missing, the C<pod> tests are skipped.
 
 =head1 TODO
 
@@ -481,6 +525,12 @@ be done. If you  think one of these  would be helpful say  so - and it will then
 move up on my priority list.
 
 =over 4
+
+=item *
+
+Include an example of a 01distribution.t that only uses Test::Distribution if it
+is installed. This way module authors do not need to make it a required module.
+[use a variant of the require method .. .see man perlfunc: require]
 
 =item *
 
@@ -526,19 +576,17 @@ or via email:
 bug-test-distribution@rt.cpan.org
 
 
-=head1 AUTHOR
+=head1 AUTHORS
 
 Marcel GrE<uuml>nauer <marcel@cpan.org>
-
-=head1 MAINTAINER
 
 Sagar R. Shah
 
 =head1 OTHER CREDITS
 
-This module was inspired by a use.perl.org journal entry by C<brian d foy>
-(see http://use.perl.org/~brian_d_foy/journal/7463) where he describes
-an idea by Andy Lester.
+This module was inspired by a use.perl.org journal  entry by C<brian d foy> (see
+L<http://use.perl.org/~brian_d_foy/journal/7463>) where he  describes an idea by
+Andy Lester.
 
 =head1 COPYRIGHT
 
@@ -551,7 +599,8 @@ it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-perl(1), Test::More(3pm), Test::Pod(3pm), File::Find::Rule(3pm).
+perl(1),     File::Find::Rule(3pm),        Test::More(3pm),      Test::Pod(3pm),
+Test::Signature(3pm).
 
 =cut
 
