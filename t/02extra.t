@@ -10,5 +10,8 @@ is(Test::Distribution::num_tests(), $number_of_tests, 'number of tests');
 
 is_deeply(Test::Distribution::packages(), 'Test::Distribution',
     'packages found');
-is_deeply(Test::Distribution::files(), 'blib/lib/Test/Distribution.pm',
-    'files found');
+
+my @files = Test::Distribution::files();
+# On non Unix type file systems the first file separator could be different than the unix /. The others still seem to be the unix /. Not sure why, but they come from File::Find::Rule, whereas the first comes from File::Spec
+like($files[0], qr/blib.*?lib.*?Test.*?Distribution.pm/);
+

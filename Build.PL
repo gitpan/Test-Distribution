@@ -8,7 +8,6 @@ Module::Build->new(
 				     'File::Find::Rule' => 0.03,
 				     'Module::CoreList' => 1.93,
 				     'Test::More'       => 0.45,
-				     'Test::Prereq'     => 0,
 				     'Test::Pod'        => 0.95,
 				     'Test::Signature'  => 0,
 				    },

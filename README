@@ -175,12 +175,9 @@ TODO
     actually be done. If you think one of these would be helpful say so -
     and it will then move up on my priority list.
 
-    *   Module::Build support
-
     *   Look at Paul Hughes reported bug for exporting :all
 
-    *   Look at getting 02extra.t working correctly on windows (and other
-        platforms?)
+    *   Module::Build support [currently waiting for a fix on Test::Prereq ]
 
     *   podcoverage action via Test::Pod::Coverage
 

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 
-our $VERSION = '1.10';
+our $VERSION = '1.11';
 
 # our @types = qw/pod use versions description manifest prereq exports/;
 our @types = qw/sig use versions prereq pod description/;
@@ -528,15 +528,11 @@ move up on my priority list.
 
 =item *
 
-Module::Build support
-
-=item *
-
 Look at Paul Hughes reported bug for exporting :all
 
 =item *
 
-Look at getting 02extra.t working correctly on windows (and other platforms?)
+Module::Build support  [currently waiting for a fix on Test::Prereq ]
 
 =item *
 

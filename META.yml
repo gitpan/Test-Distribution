@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name: Test-Distribution
-version: 1.10
+version: 1.11
 license: perl
 distribution_type: module
 requires:
@@ -8,7 +8,6 @@ requires:
   Module::CoreList: 1.93
   Test::More: 0.45
   Test::Pod: 0.95
-  Test::Prereq: 0
   Test::Signature: 0
 recommends: {}
 build_requires: {}
@@ -16,32 +15,32 @@ conflicts: {}
 provides:
   Test::Distribution:
     file: lib/Test/Distribution.pm
-    version: 1.10
+    version: 1.11
   Test::Distribution::base:
     file: lib/Test/Distribution.pm
-    version: 1.10
+    version: 1.11
   Test::Distribution::description:
     file: lib/Test/Distribution.pm
-    version: 1.10
+    version: 1.11
   Test::Distribution::exports:
     file: lib/Test/Distribution.pm
-    version: 1.10
+    version: 1.11
   Test::Distribution::manifest:
     file: lib/Test/Distribution.pm
-    version: 1.10
+    version: 1.11
   Test::Distribution::pod:
     file: lib/Test/Distribution.pm
-    version: 1.10
+    version: 1.11
   Test::Distribution::prereq:
     file: lib/Test/Distribution.pm
-    version: 1.10
+    version: 1.11
   Test::Distribution::sig:
     file: lib/Test/Distribution.pm
-    version: 1.10
+    version: 1.11
   Test::Distribution::use:
     file: lib/Test/Distribution.pm
-    version: 1.10
+    version: 1.11
   Test::Distribution::versions:
     file: lib/Test/Distribution.pm
-    version: 1.10
+    version: 1.11
 generated_by: Module::Build version 0.21
