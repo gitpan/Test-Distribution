@@ -89,6 +89,11 @@ OPTIONS
         both "only" and "not". In this case only the tests specified in
         "only", but not "not" are run (if this makes any sense).
 
+    "distversion"
+        If you test this to a true value, as well as testing that each
+        module has a $VERSION defined, Test::Distribution will also ensure
+        that the $VERSION matches that of the distribution.
+
 TEST TYPES
     Here is a description of the types of tests available.
 
@@ -175,18 +180,11 @@ TODO
     actually be done. If you think one of these would be helpful say so -
     and it will then move up on my priority list.
 
-    *   Add back the funcionality to check that $VERSION in each module
-        matches the distribution version - but as an optional feature.
-        (Requested by David A Golden)
-
     *   Module::Build support [currently waiting for a fix on Test::Prereq ]
 
     *   podcoverage action via Test::Pod::Coverage
 
 FEATURE IDEAS
-    "manifest" test type
-        This would check the MANIFEST's integrity.
-
     "export" test type
         This would mandate that there should be a test for each exported
         symbol of each module.
@@ -200,7 +198,7 @@ BUGS
     bug queue when someone else takes over a module (I'm not the original
     author of this module)
 
-    Please email me: sagarshah AT softhome.net
+    Please email me: sagarshah AT softhome DOT net
 
 AUTHORS
     Marcel Grünauer <marcel@cpan.org>
@@ -221,6 +219,7 @@ COPYRIGHT
     under the same terms as Perl itself.
 
 SEE ALSO
-    perl(1), File::Find::Rule(3pm), Test::More(3pm), Test::Pod(3pm),
+    perl(1), ExtUtils::Manifest(3pm), File::Find::Rule(3pm),
+    Module::CoreList(3pm), Test::More(3pm), Test::Pod(3pm),
     Test::Signature(3pm).
 

@@ -9,7 +9,7 @@ use ExtUtils::Manifest qw(manicheck maniread);
 use Test::More;
 
 
-our $VERSION = '1.16';
+our $VERSION = '1.17';
 
 our @types = qw/manifest sig use versions prereq pod description/;
 
@@ -96,7 +96,7 @@ sub run_tests {
 		$testers{$type} = $pkg->new(
 		    packages => \@packages,
 		    files    => \@files,
-		    dir      => $args{dir},
+		    %args,
 		);
 
 		$tests += $testers{$type}->num_tests;
@@ -174,19 +174,42 @@ package Test::Distribution::versions;
 use Test::More;
 our @ISA = 'Test::Distribution::base';
 
-sub num_tests { scalar @{ $_[0]->{packages} } }
+sub num_tests { 
+   my $self = shift;
+   
+   my $num_packages = scalar @{ $self->{packages} };
+
+   if($self->{distversion}) {
+       return $num_packages * 2 - 1;  # Don't test package itself to see if its own dist version matches
+   }
+   else {
+       return $num_packages;
+   }
+
+}
 
 sub run_tests {
 	my $self = shift;
 
 	for my $package (@{ $self->{packages} }) {
+	    our $version;
+	    
+	    my $this_version = do {
+		no strict 'refs';
+	     	${"$package\::VERSION"}
+    	    };
 
-		my $version = do {
-		    no strict 'refs';
-		    ${"$package\::VERSION"}
-		};
-
+	    unless (defined $version) {
+		$version = $this_version;
 		ok(defined($version), "$package defines a version");
+		next;
+	    }
+
+    	    ok(defined($version), "$package defines a version");
+
+	    if($self->{distversion}) {
+		is($this_version, $version, "$package version matches");
+	    }
 	}
 }
 
@@ -424,6 +447,12 @@ strings. Although it doesn't seem to make much sense, you can use both
 C<only> and C<not>. In this case only the tests specified in C<only>,
 but not C<not> are run (if this makes any sense).
 
+=item C<distversion>
+
+If you test this to a true value, as well as testing that each module has a
+$VERSION defined, Test::Distribution will also ensure that the $VERSION matches
+that of the distribution.
+
 =back
 
 =head1 TEST TYPES
@@ -545,11 +574,6 @@ move up on my priority list.
 
 =item *
 
-Add  back  the funcionality to check  that  $VERSION in each  module matches the
-distribution version - but as an optional feature. (Requested by David A Golden)
-
-=item *
-
 Module::Build support  [currently waiting for a fix on Test::Prereq ]
 
 =item *
@@ -561,10 +585,6 @@ podcoverage action via Test::Pod::Coverage
 =head1 FEATURE IDEAS
 
 =over 4
-
-=item C<manifest> test type
-
-This would check the MANIFEST's integrity.
 
 =item C<export> test type
 
@@ -582,7 +602,7 @@ To report a bug  or request an enhancement  DO NOT use CPAN's  excellent Request
 Tracker. As it currently does not support passing ownership  of a bug queue when
 someone else takes over a module (I'm not the original author of this module)
 
-Please email me: sagarshah AT softhome.net
+Please email me: sagarshah AT softhome DOT net
 
 =head1 AUTHORS
 
@@ -607,7 +627,8 @@ it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-perl(1),     File::Find::Rule(3pm),        Test::More(3pm),      Test::Pod(3pm),
+perl(1),   ExtUtils::Manifest(3pm),  File::Find::Rule(3pm),
+Module::CoreList(3pm),       Test::More(3pm),      Test::Pod(3pm),
 Test::Signature(3pm).
 
 =cut
