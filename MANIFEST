@@ -1,5 +1,7 @@
+Build.PL
 Changes
 MANIFEST			This list of files
+META.yml
 Makefile.PL
 README
 lib/Test/Distribution.pm
@@ -10,3 +12,5 @@ t/04only_pod_extra.t
 t/05only_pod_use_extra.t
 t/06only_pod_versions_extra.t
 t/07prereq.t
+
+SIGNATURE    Added here by Module::Build

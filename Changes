@@ -1,5 +1,11 @@
 Revision history for Perl extension Test::Distribution.
 
+1.06 	- New Maintainer/Owner: Sagar R. Shah
+     	- Moved from ExtUtils::MakeMaker to Module::Build for building
+	- Tests are now run in a specific order (stops Test::Distribution trying to evaluate $VERSION before doing a use)
+        - All non-core use()d modules test now has a proper test name
+	- Thanks to David A Golden for the patch
+
 1.05  Mon Jul 28 11:23:45 CEST 2003
         - Testing PREREQ_PM relies on Module::CoreList which, even at
           the current version, doesn't know about perl 5.8.1 yet.  So in

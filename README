@@ -142,7 +142,7 @@ FEATURE IDEAS
     Unnecessary? Do you have feature requests of your own?
 
 BUGS
-    If you find any bugs or oddities, please do inform the author.
+    If you find any bugs or oddities, please do inform the maintainer.
 
 INSTALLATION
     See perlmodinstall for information and options on installing Perl
@@ -159,6 +159,9 @@ VERSION
 
 AUTHOR
     Marcel Grünauer <marcel@cpan.org>
+
+MAINTAINER
+    Sagar R. Shah
 
 OTHER CREDITS
     This module was inspired by a use.perl.org journal entry by "brian d

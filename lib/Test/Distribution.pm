@@ -4,10 +4,10 @@ use strict;
 use warnings;
 use Test::More;
 
-our $VERSION = '1.05';
+our $VERSION = '1.06';
 
 # our @types = qw/pod use versions description manifest prereq exports/;
-our @types = qw/pod use versions description prereq/;
+our @types = qw/use versions prereq pod description/;
 
 my @error;
 for (qw/File::Spec File::Basename File::Find::Rule/) {
@@ -70,7 +70,8 @@ sub run_tests {
 	    join '::' => @dir, File::Basename::basename($file, '.pm');
 	    } @files;
 
-	my %perform = map { $_ => 1 } @{$args{only}};
+	my %perform;
+	%perform = map { $_ => 1 } @{$args{only}};
 	delete @perform{ @{$args{not}} };
 
 	# need to use() modules before we can check their $VERSIONS,
@@ -96,8 +97,8 @@ sub run_tests {
 
 	plan tests => $tests;
 
-	for my $type (keys %perform) {
-		$testers{$type}->run_tests;
+	for my $type (@types) {
+		$testers{$type}->run_tests() if $perform{$type};
 	}
 }
 
@@ -256,7 +257,8 @@ sub run_tests { SKIP: {
 	die $@ if $@;
 
 	delete @use{our @prereq};
-    ok(keys(%use) == 0 or diag(prereq_error(%use)));
+	ok(keys(%use) == 0, 'All non-core use()d modules listed in PREREQ_PM')
+	  or diag(prereq_error(%use));
 } }
 
 # construct an error message for test output
@@ -470,7 +472,7 @@ necessary? Unnecessary? Do you have feature requests of your own?
 
 =head1 BUGS
 
-If you find any bugs or oddities, please do inform the author.
+If you find any bugs or oddities, please do inform the maintainer.
 
 =head1 INSTALLATION
 
@@ -489,6 +491,10 @@ This document describes version 1.05 of C<Test::Distribution>.
 =head1 AUTHOR
 
 Marcel GrE<uuml>nauer <marcel@cpan.org>
+
+=head1 MAINTAINER
+
+Sagar R. Shah
 
 =head1 OTHER CREDITS
 
