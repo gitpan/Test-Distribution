@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 
-our $VERSION = '1.09';
+our $VERSION = '1.10';
 
 # our @types = qw/pod use versions description manifest prereq exports/;
 our @types = qw/sig use versions prereq pod description/;
@@ -528,17 +528,19 @@ move up on my priority list.
 
 =item *
 
-Include an example of a 01distribution.t that only uses Test::Distribution if it
-is installed. This way module authors do not need to make it a required module.
-[use a variant of the require method .. .see man perlfunc: require]
-
-=item *
-
 Module::Build support
 
 =item *
 
-Go through patches sent to original author
+Look at Paul Hughes reported bug for exporting :all
+
+=item *
+
+Look at getting 02extra.t working correctly on windows (and other platforms?)
+
+=item *
+
+podcoverage action via Test::Pod::Coverage
 
 =back
 
@@ -554,10 +556,6 @@ This would check the MANIFEST's integrity.
 
 This would mandate that there should be a test for each exported symbol
 of each module.
-
-=item C<podcoverage> test type
-
-This would pass all modules through Pod::Coverage.
 
 =back
 

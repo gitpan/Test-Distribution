@@ -1,5 +1,7 @@
 Revision history for Perl extension Test::Distribution.
 
+1.10	- Updated TODO
+
 1.09    - Added missing Test::Signature to requires hash in Build.PL
 	- Added missing SKIP block to Test::Distribution::sig::run_tests
 

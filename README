@@ -175,14 +175,14 @@ TODO
     actually be done. If you think one of these would be helpful say so -
     and it will then move up on my priority list.
 
-    *   Include an example of a 01distribution.t that only uses
-        Test::Distribution if it is installed. This way module authors do
-        not need to make it a required module. [use a variant of the require
-        method .. .see man perlfunc: require]
-
     *   Module::Build support
 
-    *   Go through patches sent to original author
+    *   Look at Paul Hughes reported bug for exporting :all
+
+    *   Look at getting 02extra.t working correctly on windows (and other
+        platforms?)
+
+    *   podcoverage action via Test::Pod::Coverage
 
 FEATURE IDEAS
     "manifest" test type
@@ -191,9 +191,6 @@ FEATURE IDEAS
     "export" test type
         This would mandate that there should be a test for each exported
         symbol of each module.
-
-    "podcoverage" test type
-        This would pass all modules through Pod::Coverage.
 
     Let me know what you think of these ideas. Are they necessary?
     Unnecessary? Do you have feature requests of your own?
