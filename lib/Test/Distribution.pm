@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 
-our $VERSION = '1.06';
+our $VERSION = '1.07';
 
 # our @types = qw/pod use versions description manifest prereq exports/;
 our @types = qw/use versions prereq pod description/;
@@ -185,7 +185,8 @@ sub num_tests { 4 }
 
 sub run_tests {
 	my $self = shift;
-	ok(-e, "$_ exists") for qw/Changes MANIFEST README Makefile.PL/;
+	ok(-e, "$_ exists") for qw/Changes MANIFEST README/;
+	ok(-e 'Build.PL' or -e 'Makefile.PL', 'Build.PL or Makefile.PL exists');
 }
 
 
@@ -397,7 +398,7 @@ Checks that the following files exist:
 
 =item README
 
-=item Makefile.PL
+=item Build.PL or Makefile.PL
 
 =back
 
@@ -407,22 +408,6 @@ Checks whether all C<use()>d modules that aren't in the perl core are
 also mentioned in Makefile.PL's C<PREREQ_PM>.
 
 =back
-
-=head1 TEST::DISTRIBUTION'S OWN PREREQUISITES
-
-C<Test::Distribution> uses C<File::Find::Rule> and C<Test::Pod>, amongst
-other modules. Each of these modules have their own rather long list
-of prerequisites. If you use the CPAN shell or a package manager to
-install modules, this is probably of no concern, but if you install
-modules manually, you might not care to install a lot of modules just
-to get C<Test::Distribution> to run.
-
-Because of this, C<Test::Distribution> checks whether you have
-the required modules installed and skips tests (per C<Test::More>
-definition) as necessary if these modules are not found. If you don't
-have C<Test::Pod>, you can't run the C<pod> tests. If you don't have
-C<Module::CoreList>, you can't run the C<prereq> tests. But if you don't
-have C<File::Find::Rule>, all tests are skipped.
 
 =head1 EXPOSED INTERNALS
 
@@ -452,6 +437,61 @@ specifications.
 
 =back
 
+=head1 INSTALLATION
+
+This module uses Module::Build for its installation. To install this module type
+the following:
+
+  perl Build.PL
+  ./Build
+  ./Build test
+  ./Build install
+
+
+If you do not have Module::Build type:
+
+  perl Makefile.PL
+
+to fetch it. Or use CPAN or CPANPLUS and fetch it "manually".
+
+=head1 DEPENDENCIES
+
+This module requires these other modules and libraries:
+
+ File::Basename
+ File::Find::Rule
+ File::Spec
+ Test::More
+
+C<Test::More> is only required for testing purposes.
+
+This module has these optional dependencies:
+
+ Module::CoreList
+ Test::Pod
+
+If C<Module::CoreList> is missing, the C<prereq> tests are skipped.
+
+If <Test::Pod> is missing, the C<pod> tests are skipped.
+
+=head1 TODO
+
+Just because these items are in the todo list,  does not mean they will actually
+be done. If you  think one of these  would be helpful say  so - and it will then
+move up on my priority list.
+
+=over 4
+
+=item *
+
+Module::Build support
+
+=item *
+
+Go through patches sent to original author
+
+=back
+
 =head1 FEATURE IDEAS
 
 =over 4
@@ -465,6 +505,10 @@ This would check the MANIFEST's integrity.
 This would mandate that there should be a test for each exported symbol
 of each module.
 
+=item C<podcoverage> test type
+
+This would pass all modules through Pod::Coverage.
+
 =back
 
 Let me know what you think of these ideas. Are they
@@ -472,21 +516,15 @@ necessary? Unnecessary? Do you have feature requests of your own?
 
 =head1 BUGS
 
-If you find any bugs or oddities, please do inform the maintainer.
+To report a bug or request an enhancement use CPAN's excellent Request Tracker,
+either via the web:
 
-=head1 INSTALLATION
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Distribution>
 
-See perlmodinstall for information and options on installing Perl modules.
+or via email:
 
-=head1 AVAILABILITY
+bug-test-distribution@rt.cpan.org
 
-The latest version of this module is available from the Distribution Perl
-Archive Network (CPAN). Visit <http://www.perl.com/CPAN/> to find a CPAN
-site near you. Or see <http://www.perl.com/CPAN/authors/id/M/MA/MARCEL/>.
-
-=head1 VERSION
-
-This document describes version 1.05 of C<Test::Distribution>.
 
 =head1 AUTHOR
 
@@ -505,6 +543,8 @@ an idea by Andy Lester.
 =head1 COPYRIGHT
 
 Copyright 2002-2003 Marcel GrE<uuml>nauer. All rights reserved.
+
+Copyright 2003, Sagar R. Shah, All rights reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

@@ -88,26 +88,11 @@ TEST TYPES
         Changes
         MANIFEST
         README
-        Makefile.PL
+        Build.PL or Makefile.PL
 
     "prereq"
         Checks whether all "use()"d modules that aren't in the perl core are
         also mentioned in Makefile.PL's "PREREQ_PM".
-
-TEST::DISTRIBUTION'S OWN PREREQUISITES
-    "Test::Distribution" uses "File::Find::Rule" and "Test::Pod", amongst
-    other modules. Each of these modules have their own rather long list of
-    prerequisites. If you use the CPAN shell or a package manager to install
-    modules, this is probably of no concern, but if you install modules
-    manually, you might not care to install a lot of modules just to get
-    "Test::Distribution" to run.
-
-    Because of this, "Test::Distribution" checks whether you have the
-    required modules installed and skips tests (per "Test::More" definition)
-    as necessary if these modules are not found. If you don't have
-    "Test::Pod", you can't run the "pod" tests. If you don't have
-    "Module::CoreList", you can't run the "prereq" tests. But if you don't
-    have "File::Find::Rule", all tests are skipped.
 
 EXPOSED INTERNALS
     There are a few subroutines to help you see what this module is doing.
@@ -130,6 +115,49 @@ EXPOSED INTERNALS
         This is the number of tests that this module has run, based on your
         specifications.
 
+INSTALLATION
+    This module uses Module::Build for its installation. To install this
+    module type the following:
+
+      perl Build.PL
+      ./Build
+      ./Build test
+      ./Build install
+
+    If you do not have Module::Build type:
+
+      perl Makefile.PL
+
+    to fetch it. Or use CPAN or CPANPLUS and fetch it "manually".
+
+DEPENDENCIES
+    This module requires these other modules and libraries:
+
+     File::Basename
+     File::Find::Rule
+     File::Spec
+     Test::More
+
+    "Test::More" is only required for testing purposes.
+
+    This module has these optional dependencies:
+
+     Module::CoreList
+     Test::Pod
+
+    If "Module::CoreList" is missing, the "prereq" tests are skipped.
+
+    If <Test::Pod> is missing, the "pod" tests are skipped.
+
+TODO
+    Just because these items are in the todo list, does not mean they will
+    actually be done. If you think one of these would be helpful say so -
+    and it will then move up on my priority list.
+
+    *   Module::Build support
+
+    *   Go through patches sent to original author
+
 FEATURE IDEAS
     "manifest" test type
         This would check the MANIFEST's integrity.
@@ -138,24 +166,21 @@ FEATURE IDEAS
         This would mandate that there should be a test for each exported
         symbol of each module.
 
+    "podcoverage" test type
+        This would pass all modules through Pod::Coverage.
+
     Let me know what you think of these ideas. Are they necessary?
     Unnecessary? Do you have feature requests of your own?
 
 BUGS
-    If you find any bugs or oddities, please do inform the maintainer.
+    To report a bug or request an enhancement use CPAN's excellent Request
+    Tracker, either via the web:
 
-INSTALLATION
-    See perlmodinstall for information and options on installing Perl
-    modules.
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Distribution>
 
-AVAILABILITY
-    The latest version of this module is available from the Distribution
-    Perl Archive Network (CPAN). Visit <http://www.perl.com/CPAN/> to find a
-    CPAN site near you. Or see
-    <http://www.perl.com/CPAN/authors/id/M/MA/MARCEL/>.
+    or via email:
 
-VERSION
-    This document describes version 1.05 of "Test::Distribution".
+    bug-test-distribution@rt.cpan.org
 
 AUTHOR
     Marcel Grünauer <marcel@cpan.org>
@@ -170,6 +195,8 @@ OTHER CREDITS
 
 COPYRIGHT
     Copyright 2002-2003 Marcel Grünauer. All rights reserved.
+
+    Copyright 2003, Sagar R. Shah, All rights reserved.
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.

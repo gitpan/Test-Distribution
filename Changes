@@ -1,5 +1,12 @@
 Revision history for Perl extension Test::Distribution.
 
+1.07	- Minor POD Updates
+	- Description  tests now allow  no  Makefile.PL if you have a
+	  Build.PL.  However    this   does  not  mean   Module::Build
+	  support.  You  still  need   a  Makefile.PL to  prevent  the
+	  PREREQ_PM tests     failing. Module::Build    support   will
+	  hopefully follow in a future version.
+
 1.06 	- New Maintainer/Owner: Sagar R. Shah
      	- Moved from ExtUtils::MakeMaker to Module::Build for building
 	- Tests are now run in a specific order (stops Test::Distribution trying to evaluate $VERSION before doing a use)
