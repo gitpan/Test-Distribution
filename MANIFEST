@@ -13,5 +13,5 @@ t/05only_pod_use_extra.t
 t/06only_pod_versions_extra.t
 t/07prereq.t
 t/08sig.t
-
+t/09only_podcover.t
 SIGNATURE    Added here by Module::Build

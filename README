@@ -94,6 +94,11 @@ OPTIONS
         module has a $VERSION defined, Test::Distribution will also ensure
         that the $VERSION matches that of the distribution.
 
+    "podcoveropts"
+        You can set this to be a hash reference of options to pass to
+        Test::Pod::Coverage's pod_coverage_ok method (which in turn gets
+        passed to Pod::Coverage.
+
 TEST TYPES
     Here is a description of the types of tests available.
 
@@ -111,6 +116,9 @@ TEST TYPES
 
     "pod"
         Checks for POD errors in files
+
+    "podcover"
+        Checks for Pod Coverage
 
     "sig"
         If the distribution has a SIGNATURE file, checks the SIGNATURE
@@ -170,6 +178,7 @@ DEPENDENCIES
 
      Module::CoreList
      Test::Pod
+     Test::Pod::Coverage
 
     If "Module::CoreList" is missing, the "prereq" tests are skipped.
 
@@ -181,8 +190,6 @@ TODO
     and it will then move up on my priority list.
 
     *   Module::Build support [currently waiting for a fix on Test::Prereq ]
-
-    *   podcoverage action via Test::Pod::Coverage
 
 FEATURE IDEAS
     "export" test type

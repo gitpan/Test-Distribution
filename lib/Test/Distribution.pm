@@ -9,9 +9,9 @@ use ExtUtils::Manifest qw(manicheck maniread);
 use Test::More;
 
 
-our $VERSION = '1.18';
+our $VERSION = '1.19';
 
-our @types = qw/manifest sig use versions prereq pod description/;
+our @types = qw/manifest sig use versions prereq pod description podcover/;
 
 my @error;
 for (qw/File::Spec File::Basename File::Find::Rule/) {
@@ -50,6 +50,8 @@ sub import {
 
 	$args{dirlist} = [ qw(lib) ];
 	$args{dir}   ||= File::Spec->catfile(@{ $args{dirlist} });
+
+	$args{podcoveropts} ||= {};
 
 	run_tests(\%args);
 }
@@ -105,7 +107,7 @@ sub run_tests {
 	plan tests => $tests;
 
 	for my $type (@types) {
-		$testers{$type}->run_tests() if $perform{$type};
+		$testers{$type}->run_tests($args) if $perform{$type};
 	}
 }
 
@@ -155,6 +157,27 @@ sub run_tests { SKIP: {
 	skip 'Test::Pod required for testing POD', $self->num_tests() if $@;
 
 	for my $file (@{ $self->{files} }) { pod_file_ok($file) }
+} }
+
+
+package Test::Distribution::podcover;
+use Test::More;
+our @ISA = 'Test::Distribution::base';
+
+sub num_tests { scalar @{ $_[0]->{packages} } }
+
+sub run_tests { SKIP: {
+	my $self = shift;
+	my $args = shift;
+
+	eval {
+		require Test::Pod::Coverage;
+		Test::Pod::Coverage->import;
+	};
+	skip 'Test::Pod::Coverage required for testing POD', $self->num_tests() if $@;
+
+	my $trustme = $args->{podcoveropts};
+	for my $package (@{ $self->{packages} }) { pod_coverage_ok($package, $trustme, 'Pod Coverage ok') }
 } }
 
 
@@ -347,6 +370,7 @@ sub run_tests { SKIP: {
 	}
 } }
 
+
 1;
 
 __END__
@@ -454,6 +478,12 @@ If you test this to a true value, as well as testing that each module has a
 $VERSION defined, Test::Distribution will also ensure that the $VERSION matches
 that of the distribution.
 
+=item C<podcoveropts>
+
+You can set this to be a hash reference of options to pass to
+Test::Pod::Coverage's pod_coverage_ok method (which in turn gets passed to
+Pod::Coverage.
+
 =back
 
 =head1 TEST TYPES
@@ -486,6 +516,10 @@ also mentioned in Makefile.PL's C<PREREQ_PM>.
 =item C<pod>
 
 Checks for POD errors in files
+
+=item C<podcover>
+
+Checks for Pod Coverage
 
 =item C<sig>
 
@@ -560,6 +594,7 @@ This module has these optional dependencies:
 
  Module::CoreList
  Test::Pod
+ Test::Pod::Coverage
 
 If C<Module::CoreList> is missing, the C<prereq> tests are skipped.
 
@@ -576,10 +611,6 @@ move up on my priority list.
 =item *
 
 Module::Build support  [currently waiting for a fix on Test::Prereq ]
-
-=item *
-
-podcoverage action via Test::Pod::Coverage
 
 =back
 

@@ -1,5 +1,4 @@
 use Module::Build;
-# See perldoc Module::Build for details of how this works
 
 Module::Build->new(
 		   license       => 'perl',
@@ -10,9 +9,11 @@ Module::Build->new(
 				     'Module::CoreList'   => 1.93,
 				     'Test::More'         => 0.45,
 				     'Test::Pod'          => 0.95,
+						 'Test::Pod::Coverage'=> 0,
 				     'Test::Signature'    => 0,
 				    },
 		   create_readme => 1,
 		   sign          => 1,
 		   create_makefile_pl => 'passthrough',
+       add_to_cleanup      => [ 'Test-Distribution-*' ],
 		  )->create_build_script;

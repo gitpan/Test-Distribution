@@ -1,5 +1,7 @@
 Revision history for Perl extension Test::Distribution.
 
+1.19 - Added Test::Pod::Coverage support
+
 1.18    - Now accept file ChangeLog as an alternative to Changes
         - Minor bug fix
 	- Thanks to Steffen Schwigon for both of these changes.
