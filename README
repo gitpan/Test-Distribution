@@ -1,0 +1,110 @@
+NAME
+    Test::Distribution - perform tests on all modules of a distribution
+
+SYNOPSIS
+      $ cat t/01distribution.t
+      use Test::Distribution;
+      $ make test
+      ...
+
+DESCRIPTION
+    When using this module in a test script, it goes through all the modules
+    in your distribution, checks their POD, checks that they compile ok and
+    checks that they all define the same $VERSION.
+
+    It defines its own testing plan, so you usually don't use it in
+    conjunction with other "Test::*" modules in the same file. It's
+    recommended that you just create a one-line test script as shown in the
+    SYNOPSIS above. However, there are options...
+
+OPTIONS
+    On the line in which you "use()" this module, you can specify named
+    arguments that influence the testing behavior.
+
+    "tests => NUMBER"
+        Specifies that in addition to the tests run by this module, your
+        test script will run additional tests. In other words, this value
+        influences the test plan. For example:
+
+          use Test::Distribution tests => 1;
+          use Test::More;
+          is($foo, $bar, 'baz');
+
+        It is important that you don't specify a "tests" argument when using
+        "Test::More" or other test modules as the plan is handled by
+        "Test::Distribution".
+
+    "only => STRING|LIST"
+        Specifies that only certain sets of tests are to be run. Possible
+        values are "pod", "use" and "versions". For example, if you only
+        want to run the POD tests, you could say:
+
+          use Test::Distribution only => 'pod';
+
+        To specify that you only want to run the POD tests and the "use"
+        tests, and also that you are going to run two tests of your own,
+        use:
+
+          use Test::Distribution
+            only  => [ qw/pod use/ ],
+            tests => 2;
+
+        Note that when you specify the "versions" option, the "use" option
+        is automatically added. This is because in order to get a module's
+        $VERSION, it has to be loaded. In this case we might as well run a
+        "use" test.
+
+EXPOSED INTERNALS
+    There are a few subroutines to help you see what this module is doing.
+    Note that these subroutines are neither exported nor exportable, so you
+    have to call them fully qualified.
+
+    "Test::Distribution::packages()"
+        This is a list of packages that have been found. That is, we assume
+        that each file contains a package of the name indicated by the
+        file's relative position. For example, a file in
+        "blib/lib/Foo/Bar.pm" is expected to be available via "use
+        Foo::Bar".
+
+    "Test::Distribution::files()"
+        This is a list of files that tests have been run on. The filenames
+        are relative to the distribution's root directory, so they start
+        with "blib/lib".
+
+    "Test::Distribution::num_tests()"
+        This is the number of tests that this module has run, based on your
+        specifications.
+
+BUGS
+    If you find any bugs or oddities, please do inform the author.
+
+INSTALLATION
+    See perlmodinstall for information and options on installing Perl
+    modules.
+
+AVAILABILITY
+    The latest version of this module is available from the Distribution
+    Perl Archive Network (CPAN). Visit <http://www.perl.com/CPAN/> to find a
+    CPAN site near you. Or see
+    <http://www.perl.com/CPAN/authors/id/M/MA/MARCEL/>.
+
+VERSION
+    This document describes version 1.02 of "Test::Distribution".
+
+AUTHOR
+    Marcel Grünauer <marcel@cpan.org>
+
+OTHER CREDITS
+    This module was inspired by a use.perl.org journal entry by brian d foy
+    (see http://use.perl.org/~brian_d_foy/journal/7463) where he describes
+    an idea by Andy Lester.
+
+COPYRIGHT
+    Copyright 2002 Marcel Grünauer. All rights reserved.
+
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
+SEE ALSO
+    perl(1), Test::More(3pm), Test::Pod(3pm).
+
