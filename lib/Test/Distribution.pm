@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 
-our $VERSION = '1.12';
+our $VERSION = '1.13';
 
 # our @types = qw/pod use versions description manifest prereq exports/;
 our @types = qw/sig use versions prereq pod description/;
@@ -529,7 +529,11 @@ move up on my priority list.
 
 =item *
 
-Look at Paul Hughes reported bug for exporting :all
+Consider Paul Hughes' patch for optionally using the MANIFEST to define which files to run tests on
+
+=item *
+
+Allow files to have a different version number from the distribution
 
 =item *
 

@@ -1,5 +1,7 @@
 Revision history for Perl extension Test::Distribution.
 
+1.13	- Simple update of TODO which i should have done in 1.12
+
 1.12	- prereq tests are now skipped if a Build.PL is found. Stop gap
 	  measure till Test::Prereq has been patched.
 	  (thanks to Paul Hughes aka Barbie)

@@ -175,7 +175,10 @@ TODO
     actually be done. If you think one of these would be helpful say so -
     and it will then move up on my priority list.
 
-    *   Look at Paul Hughes reported bug for exporting :all
+    *   Consider Paul Hughes' patch for optionally using the MANIFEST to
+        define which files to run tests on
+
+    *   Allow files to have a different version number from the distribution
 
     *   Module::Build support [currently waiting for a fix on Test::Prereq ]
 
