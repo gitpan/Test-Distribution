@@ -1,13 +1,17 @@
 package Test::Distribution;
 
+# pragmata
 use strict;
 use warnings;
+
+# perl modules
+use ExtUtils::Manifest qw(manicheck maniread);
 use Test::More;
 
-our $VERSION = '1.14';
 
-# our @types = qw/pod use versions description manifest prereq exports/;
-our @types = qw/sig use versions prereq pod description/;
+our $VERSION = '1.15';
+
+our @types = qw/manifest sig use versions prereq pod description/;
 
 my @error;
 for (qw/File::Spec File::Basename File::Find::Rule/) {
@@ -44,7 +48,7 @@ sub import {
 
 	$args{tests} ||= 0;
 
-	$args{dirlist} = [ qw(blib lib) ];
+	$args{dirlist} = [ qw(lib) ];
 	$args{dir}   ||= File::Spec->catfile(@{ $args{dirlist} });
 
 	run_tests(\%args);
@@ -56,7 +60,10 @@ sub run_tests {
 	my $args = shift;
 	my %args = %$args;
 
-	our @files = File::Find::Rule->file()->name('*.pm')->in($args{dir});
+	our @files = (-f 'MANIFEST')
+	  ? _find_manifest_files('.pm$')
+	  : File::Find::Rule->file()->name('*.pm')->in($args{dir});
+
 	our @packages = map {
 	    # $_ is like 'blib/lib/Foo/Bar/Baz.pm',
 	    # after splitpath: $dir is 'blib/lib/Foo/Bar', $file is 'Baz.pm',
@@ -106,6 +113,20 @@ sub packages  { our @packages }
 sub files     { our @files }
 sub num_tests { our $tests }
 
+sub _find_manifest_files {
+	my($pattern) = @_;
+	return () unless (-f 'MANIFEST');
+
+	my $rh_manifest = maniread();
+
+	my @files;
+
+	foreach my $file (keys %$rh_manifest) {
+		push @files, $file if ($file =~ m/$pattern/);
+	}
+
+	return @files;
+}
 
 package Test::Distribution::base;
 
@@ -183,15 +204,17 @@ sub run_tests {
 }
 
 
-# XXX - not yet implemented and no docs or tests yet.
 package Test::Distribution::manifest;
 use Test::More;
 our @ISA = 'Test::Distribution::base';
 
-sub num_tests { 0 }
+sub num_tests { 1 }
 
 sub run_tests {
-	my $self = shift;
+    my $self = shift;
+   
+    my @missing_files = ExtUtils::Manifest::manicheck();
+    ok(scalar @missing_files == 0, "Checking MANIFEST integrity");
 }
 
 
@@ -522,7 +545,8 @@ move up on my priority list.
 
 =item *
 
-Consider Paul Hughes' patch for optionally using the MANIFEST to define which files to run tests on
+Add  back  the funcionality to check  that  $VERSION in each  module matches the
+distribution version - but as an optional feature. (Requested by David A Golden)
 
 =item *
 
@@ -554,15 +578,11 @@ necessary? Unnecessary? Do you have feature requests of your own?
 
 =head1 BUGS
 
-To report a bug or request an enhancement use CPAN's excellent Request Tracker,
-either via the web:
+To report a bug  or request an enhancement  DO NOT use CPAN's  excellent Request
+Tracker. As it currently does not support passing ownership  of a bug queue when
+someone else takes over a module (I'm not the original author of this module)
 
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Distribution>
-
-or via email:
-
-bug-test-distribution@rt.cpan.org
-
+Please email me: sagarshah AT softhome.net
 
 =head1 AUTHORS
 

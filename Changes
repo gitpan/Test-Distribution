@@ -1,5 +1,12 @@
 Revision history for Perl extension Test::Distribution.
 
+1.15	- Test::Distribution now uses the MANIFEST to find modules to test.
+	  It falls back to doing a find for *.pm if no MANIFEST exists.
+	  (thanks to Paul Hughes aka Barbie and Steffen Müller for suggesting
+	   this)
+	- Added manifest test.
+	  (thanks to patch from Jonas B.Nielsen)
+
 1.14 	- Versions test  now less  restrictive.  It only  requires each
 	  package defined a version. The  version does not need to be
 	  the same as the distribution version. It just needs to exist
@@ -9,7 +16,6 @@ Revision history for Perl extension Test::Distribution.
 	  the dist version would be a useful check for your personal style,
 	  let me know and i'll  add that check back in as an optional switch.
 	  (thanks to Paul Hughes aka Barbie for the spot)
-
 
 1.13	- Simple update of TODO which i should have done in 1.12
 

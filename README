@@ -175,8 +175,9 @@ TODO
     actually be done. If you think one of these would be helpful say so -
     and it will then move up on my priority list.
 
-    *   Consider Paul Hughes' patch for optionally using the MANIFEST to
-        define which files to run tests on
+    *   Add back the funcionality to check that $VERSION in each module
+        matches the distribution version - but as an optional feature.
+        (Requested by David A Golden)
 
     *   Module::Build support [currently waiting for a fix on Test::Prereq ]
 
@@ -194,14 +195,12 @@ FEATURE IDEAS
     Unnecessary? Do you have feature requests of your own?
 
 BUGS
-    To report a bug or request an enhancement use CPAN's excellent Request
-    Tracker, either via the web:
+    To report a bug or request an enhancement DO NOT use CPAN's excellent
+    Request Tracker. As it currently does not support passing ownership of a
+    bug queue when someone else takes over a module (I'm not the original
+    author of this module)
 
-    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Distribution>
-
-    or via email:
-
-    bug-test-distribution@rt.cpan.org
+    Please email me: sagarshah AT softhome.net
 
 AUTHORS
     Marcel Grünauer <marcel@cpan.org>
