@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 
-our $VERSION = '1.08';
+our $VERSION = '1.09';
 
 # our @types = qw/pod use versions description manifest prereq exports/;
 our @types = qw/sig use versions prereq pod description/;
@@ -291,7 +291,7 @@ sub num_tests {
 	return (-f 'SIGNATURE') ? 1 : 0;
 }
 
-sub run_tests{
+sub run_tests { SKIP: {
 	my $self = shift;
 	return unless $self->num_tests();
 	eval {
@@ -304,7 +304,7 @@ sub run_tests{
 	else {
 		signature_ok();
 	}
-}
+} }
 
 1;
 

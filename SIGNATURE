@@ -14,13 +14,13 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 327ba0b098421e3ad054f9c6cf0b26ce58b58f94 Build.PL
-SHA1 2b25ba8e3d1fa5dfd00a989dc5171cf9180514bc Changes
+SHA1 ecca50fdca70643b5e0b16fb6eb18fce77732e0d Build.PL
+SHA1 479100eb72ed599e9db735022661735beacfb77b Changes
 SHA1 eca32df702a252c239551514981fd887d859730e MANIFEST
-SHA1 15fa0d60b58ee2c08eb49b858041cb4a93b50455 META.yml
+SHA1 5eee15b9fcbd5055eb4d3f7621bb0ab8fab03a16 META.yml
 SHA1 e86245b6a930636e230cc7607c02cdabe7d1e2fc Makefile.PL
 SHA1 fb4a5ce352ad0bc37e1803b4ee8caa159d59402b README
-SHA1 14ba06dc41395024c9115f3288d3948f9db6f546 lib/Test/Distribution.pm
+SHA1 3cfdba5abc19c44bf5718ba89f7ec91deded9374 lib/Test/Distribution.pm
 SHA1 8656083c3fdd6196fa5c81e3f58c9ff2c0efff98 t/01distribution.t
 SHA1 c244b8328ea8eae2e2e67151baee599df6143986 t/02extra.t
 SHA1 2184318893bc2e38af8f29cafaeb46f432c30fff t/03only_versions.t
@@ -30,9 +30,9 @@ SHA1 5e51815b175d8d52bfc79ea99cc2be1980144375 t/06only_pod_versions_extra.t
 SHA1 552909bf9f7d022001292fc37ad887b489699ddd t/07prereq.t
 SHA1 c36f29211ccc6e8bc7b0af1b25efd03e4f6e2e3a t/08sig.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.2.1 (GNU/Linux)
+Version: GnuPG v1.2.3 (GNU/Linux)
 
-iD8DBQE/7EaPbD1fM9M5ytIRApQBAJ410sC+kCTLSL4yka+jjoSvxHKmFQCfQdzY
-jmK0DExHS+6Ce0zLxiubY3E=
-=pn4L
+iD8DBQE/71r9bD1fM9M5ytIRAgVLAKCJm0oDmu/E6cpBPgBi9mhKUqAWogCeJqbS
+Co6EqIqqIilEpnDPSS31O9g=
+=76w8
 -----END PGP SIGNATURE-----

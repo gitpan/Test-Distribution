@@ -1,5 +1,8 @@
 Revision history for Perl extension Test::Distribution.
 
+1.09    - Added missing Test::Signature to requires hash in Build.PL
+	- Added missing SKIP block to Test::Distribution::sig::run_tests
+
 1.08    - Updated example of 01distribution.t with code that doesn't
           cause testing of the module to fail if user does not have
           Test::Distribtion installed. This is good because it means
