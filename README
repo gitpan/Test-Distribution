@@ -36,8 +36,8 @@ OPTIONS
 
     "only => STRING|LIST"
         Specifies that only certain sets of tests are to be run. Possible
-        values are "pod", "use" and "versions". For example, if you only
-        want to run the POD tests, you could say:
+        values are those mentioned in TEST TYPES below. For example, if you
+        only want to run the POD tests, you could say:
 
           use Test::Distribution only => 'pod';
 
@@ -53,6 +53,61 @@ OPTIONS
         is automatically added. This is because in order to get a module's
         $VERSION, it has to be loaded. In this case we might as well run a
         "use" test.
+
+        The value for "only" can be a string or a reference to a list of
+        strings.
+
+    "not => STRING|LIST"
+        Specifies that certain types of tests should not be run. All tests
+        not mentioned in this argument are run. For example, if you want to
+        test everything except the POD, use:
+
+          use Test::Distribution
+            not => 'pod';
+
+        The value for "not" can be a string or a reference to a list of
+        strings. Although it doesn't seem to make much sense, you can use
+        both "only" and "not". In this case only the tests specified in
+        "only", but not "not" are run (if this makes any sense).
+
+TEST TYPES
+    Here is a description of the types of tests available.
+
+    "pod"
+        Checks for POD errors in files
+
+    "use"
+        This "use()"s the modules to make sure the load happens ok.
+
+    "versions"
+        Checks that all packages define $VERSION strings.
+
+    "description"
+        Checks that the following files exist:
+
+        Changes
+        MANIFEST
+        README
+        Makefile.PL
+
+    "prereq"
+        Checks whether all "use()"d modules that aren't in the perl core are
+        also mentioned in Makefile.PL's "PREREQ_PM".
+
+TEST::DISTRIBUTION'S OWN PREREQUISITES
+    "Test::Distribution" uses "File::Find::Rule" and "Test::Pod", amongst
+    other modules. Each of these modules have their own rather long list of
+    prerequisites. If you use the CPAN shell or a package manager to install
+    modules, this is probably of no concern, but if you install modules
+    manually, you might not care to install a lot of modules just to get
+    "Test::Distribution" to run.
+
+    Because of this, "Test::Distribution" checks whether you have the
+    required modules installed and skips tests (per "Test::More" definition)
+    as necessary if these modules are not found. If you don't have
+    "Test::Pod", you can't run the "pod" tests. If you don't have
+    "Module::CoreList", you can't run the "prereq" tests. But if you don't
+    have "File::Find::Rule", all tests are skipped.
 
 EXPOSED INTERNALS
     There are a few subroutines to help you see what this module is doing.
@@ -75,6 +130,17 @@ EXPOSED INTERNALS
         This is the number of tests that this module has run, based on your
         specifications.
 
+FEATURE IDEAS
+    "manifest" test type
+        This would check the MANIFEST's integrity.
+
+    "export" test type
+        This would mandate that there should be a test for each exported
+        symbol of each module.
+
+    Let me know what you think of these ideas. Are they necessary?
+    Unnecessary? Do you have feature requests of your own?
+
 BUGS
     If you find any bugs or oddities, please do inform the author.
 
@@ -89,22 +155,22 @@ AVAILABILITY
     <http://www.perl.com/CPAN/authors/id/M/MA/MARCEL/>.
 
 VERSION
-    This document describes version 1.02 of "Test::Distribution".
+    This document describes version 1.04 of "Test::Distribution".
 
 AUTHOR
     Marcel Grünauer <marcel@cpan.org>
 
 OTHER CREDITS
-    This module was inspired by a use.perl.org journal entry by brian d foy
-    (see http://use.perl.org/~brian_d_foy/journal/7463) where he describes
-    an idea by Andy Lester.
+    This module was inspired by a use.perl.org journal entry by "brian d
+    foy" (see http://use.perl.org/~brian_d_foy/journal/7463) where he
+    describes an idea by Andy Lester.
 
 COPYRIGHT
-    Copyright 2002 Marcel Grünauer. All rights reserved.
+    Copyright 2002-2003 Marcel Grünauer. All rights reserved.
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
 
 SEE ALSO
-    perl(1), Test::More(3pm), Test::Pod(3pm).
+    perl(1), Test::More(3pm), Test::Pod(3pm), File::Find::Rule(3pm).
 

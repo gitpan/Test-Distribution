@@ -1,5 +1,21 @@
 Revision history for Perl extension Test::Distribution.
 
+1.04  Sat Jul 12 22:57:00 BST 2003
+        - Changed to use Test::Pod 0.95 and pod_file_ok function
+          instead of pod_ok to prevent deprecation warnings
+          (Sagar Shah)
+
+1.03  Sat Sep  7 11:37:25 CEST 2002
+	- added a named argument 'not' to ask not to do certain types of tests
+	- added test type 'prereq' that checks whether all non-provided
+	  non-core use()d files are in Makefile.PL's PREREQ_PM
+	- added test type 'description' that checks whether Changes,
+	  README, MANIFEST and Makefile.PL exist
+	- added checking for required modules with eval{} so we can skip
+	  tests if necessary (thanks petdance)
+	- changed munging of file and directory names from regexes to
+	  use File::Spec, to be portable
+
 1.02  Mon Sep  2 23:26:01 CEST 2002
 	- changed the name to Test::Distribution as per Andy Lester's
 	  suggestion and updated docs.
