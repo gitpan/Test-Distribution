@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 
-our $VERSION = '1.04';
+our $VERSION = '1.05';
 
 # our @types = qw/pod use versions description manifest prereq exports/;
 our @types = qw/pod use versions description prereq/;
@@ -214,6 +214,8 @@ sub run_tests { SKIP: {
 		require Module::CoreList;
 	};
 	skip 'File::Find::Rule and Module::CoreList required for testing PREREQ_PM', $self->num_tests() if $@;
+    skip "testing PREREQ_PM not implemented for perl $] because Module::CoreList doesn't know about it", $self->num_tests unless
+        exists $Module::CoreList::version{ $] };
 
 	my (%use, %package);
 
@@ -254,10 +256,17 @@ sub run_tests { SKIP: {
 	die $@ if $@;
 
 	delete @use{our @prereq};
-	my $missing = join "\n" => keys %use;
-	is($missing, '', 'used packages in PREREQ_PM');
+    ok(keys(%use) == 0 or diag(prereq_error(%use)));
 } }
 
+# construct an error message for test output
+sub prereq_error {
+    my %use = @_;
+    my @modules = sort keys %use;
+    (@modules > 1 ? 'These modules are' : 'A module is') .
+      " used but not mentioned in Makefile.PL's PREREQ_PM:\n" .
+      join "\n" => map { "  $_" } @modules;
+}
 
 # XXX - not yet implemented and no docs or tests yet.
 package Test::Distribution::exports;
@@ -475,7 +484,7 @@ site near you. Or see <http://www.perl.com/CPAN/authors/id/M/MA/MARCEL/>.
 
 =head1 VERSION
 
-This document describes version 1.04 of C<Test::Distribution>.
+This document describes version 1.05 of C<Test::Distribution>.
 
 =head1 AUTHOR
 

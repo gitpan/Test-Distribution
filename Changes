@@ -1,9 +1,20 @@
 Revision history for Perl extension Test::Distribution.
 
+1.05  Mon Jul 28 11:23:45 CEST 2003
+        - Testing PREREQ_PM relies on Module::CoreList which, even at
+          the current version, doesn't know about perl 5.8.1 yet.  So in
+          the meantime, I've added a simple check to skip PREREQ_PM testing
+          if $Module::CoreList::version{ $] } doesn't exist (thanks
+          Randal L. Schwartz and Richard Clamp).
+        - Testing PREREQ_PM now outputs an easy-to-understand error message
+          if necessary. Previously I just used Test::More's is(), which
+          didn't say what the test was about, just that two strings didn't
+          match.
+
 1.04  Sat Jul 12 22:57:00 BST 2003
         - Changed to use Test::Pod 0.95 and pod_file_ok function
           instead of pod_ok to prevent deprecation warnings
-          (Sagar Shah)
+          (thanks Sagar Shah)
 
 1.03  Sat Sep  7 11:37:25 CEST 2002
 	- added a named argument 'not' to ask not to do certain types of tests

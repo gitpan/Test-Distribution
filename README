@@ -155,7 +155,7 @@ AVAILABILITY
     <http://www.perl.com/CPAN/authors/id/M/MA/MARCEL/>.
 
 VERSION
-    This document describes version 1.04 of "Test::Distribution".
+    This document describes version 1.05 of "Test::Distribution".
 
 AUTHOR
     Marcel Grünauer <marcel@cpan.org>
