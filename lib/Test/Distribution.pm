@@ -9,7 +9,7 @@ use ExtUtils::Manifest qw(manicheck maniread);
 use Test::More;
 
 
-our $VERSION = '1.17';
+our $VERSION = '1.18';
 
 our @types = qw/manifest sig use versions prereq pod description/;
 
@@ -222,8 +222,9 @@ sub num_tests { 4 }
 
 sub run_tests {
 	my $self = shift;
-	ok(-e, "$_ exists") for qw/Changes MANIFEST README/;
-	ok(-e 'Build.PL' or -e 'Makefile.PL', 'Build.PL or Makefile.PL exists');
+	ok(-e, "$_ exists") for qw/MANIFEST README/;
+	ok(-e 'Changes' || -e 'ChangeLog', 'Changes or ChangeLog exists');
+	ok(-e 'Build.PL' || -e 'Makefile.PL', 'Build.PL or Makefile.PL exists');
 }
 
 
@@ -467,7 +468,7 @@ Checks that the following files exist:
 
 =over 4
 
-=item Changes
+=item Changes  or ChangeLog
 
 =item MANIFEST
 
