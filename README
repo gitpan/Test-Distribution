@@ -23,7 +23,7 @@ SYNOPSIS
 DESCRIPTION
     When using this module in a test script, it goes through all the modules
     in your distribution, checks their POD, checks that they compile ok and
-    checks that they all define the same $VERSION.
+    checks that they all define a $VERSION.
 
     This module also performs a numer of test on the distribution itself. It
     checks that your files match your SIGNATURE file if you have one. It
@@ -177,8 +177,6 @@ TODO
 
     *   Consider Paul Hughes' patch for optionally using the MANIFEST to
         define which files to run tests on
-
-    *   Allow files to have a different version number from the distribution
 
     *   Module::Build support [currently waiting for a fix on Test::Prereq ]
 

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 
-our $VERSION = '1.13';
+our $VERSION = '1.14';
 
 # our @types = qw/pod use versions description manifest prereq exports/;
 our @types = qw/sig use versions prereq pod description/;
@@ -159,20 +159,13 @@ sub run_tests {
 	my $self = shift;
 
 	for my $package (@{ $self->{packages} }) {
-		our $version;
 
-		my $this_version = do {
+		my $version = do {
 		    no strict 'refs';
 		    ${"$package\::VERSION"}
 		};
 
-		unless (defined $version) {
-			$version = $this_version;
-			ok(defined($version),
-			    "$package defines a version");
-			next;
-		}
-		is($this_version, $version, "$package version matches");
+		ok(defined($version), "$package defines a version");
 	}
 }
 
@@ -339,7 +332,7 @@ Test::Distribution - perform tests on all modules of a distribution
 
 When using this module in a test script, it goes through all the modules
 in your distribution, checks their POD, checks that they compile ok and
-checks that they all define the same $VERSION.
+checks that they all define a  $VERSION.
 
 This module also performs a numer of test on  the distribution itself. It checks
 that your files match your  SIGNATURE file if you  have one. It checks that your
@@ -530,10 +523,6 @@ move up on my priority list.
 =item *
 
 Consider Paul Hughes' patch for optionally using the MANIFEST to define which files to run tests on
-
-=item *
-
-Allow files to have a different version number from the distribution
 
 =item *
 

@@ -1,5 +1,16 @@
 Revision history for Perl extension Test::Distribution.
 
+1.14 	- Versions test  now less  restrictive.  It only  requires each
+	  package defined a version. The  version does not need to be
+	  the same as the distribution version. It just needs to exist
+	  This caters for the quite valid style of using cvs versions in
+	  individual files. Perl does not requrie all files in a dist to
+	  have the same $VERSION. However if you think that checking against
+	  the dist version would be a useful check for your personal style,
+	  let me know and i'll  add that check back in as an optional switch.
+	  (thanks to Paul Hughes aka Barbie for the spot)
+
+
 1.13	- Simple update of TODO which i should have done in 1.12
 
 1.12	- prereq tests are now skipped if a Build.PL is found. Stop gap
@@ -32,7 +43,8 @@ Revision history for Perl extension Test::Distribution.
 
 1.06 	- New Maintainer/Owner: Sagar R. Shah
      	- Moved from ExtUtils::MakeMaker to Module::Build for building
-	- Tests are now run in a specific order (stops Test::Distribution trying to evaluate $VERSION before doing a use)
+	- Tests are now run in a specific order (stops Test::Distribution
+	  trying to evaluate $VERSION before doing a use)
         - All non-core use()d modules test now has a proper test name
 	- Thanks to David A Golden for the patch
 
