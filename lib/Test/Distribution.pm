@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 
-our $VERSION = '1.11';
+our $VERSION = '1.12';
 
 # our @types = qw/pod use versions description manifest prereq exports/;
 our @types = qw/sig use versions prereq pod description/;
@@ -215,8 +215,9 @@ sub run_tests { SKIP: {
 		require File::Find::Rule;
 		require Module::CoreList;
 	};
+	skip 'Module::Build PREREQ_PM not yet implemented', $self->num_tests() if -f 'Build.PL';
 	skip 'File::Find::Rule and Module::CoreList required for testing PREREQ_PM', $self->num_tests() if $@;
-    skip "testing PREREQ_PM not implemented for perl $] because Module::CoreList doesn't know about it", $self->num_tests unless
+	skip "testing PREREQ_PM not implemented for perl $] because Module::CoreList doesn't know about it", $self->num_tests unless
         exists $Module::CoreList::version{ $] };
 
 	my (%use, %package);

@@ -1,5 +1,9 @@
 Revision history for Perl extension Test::Distribution.
 
+1.12	- prereq tests are now skipped if a Build.PL is found. Stop gap
+	  measure till Test::Prereq has been patched.
+	  (thanks to Paul Hughes aka Barbie)
+
 1.11	- Removed Test::Prereq as a prerequisite as i'm not actually
 	  using it yet
 	- 02extra.t is more friendly on non-Unix style platforms 
