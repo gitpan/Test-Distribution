@@ -1,10 +1,12 @@
 Revision history for Perl extension Test::Distribution.
 
+1.20 - Minor documentation updates
+
 1.19 - Added Test::Pod::Coverage support
 
-1.18    - Now accept file ChangeLog as an alternative to Changes
-        - Minor bug fix
-	- Thanks to Steffen Schwigon for both of these changes.
+1.18 - Now accept file ChangeLog as an alternative to Changes
+     - Minor bug fix
+	   - Thanks to Steffen Schwigon for both of these changes.
 
 1.17	- Added the distversion option so that people can check whether $VERSION
 	  matches the distribution version. This used to be a mandatory check but

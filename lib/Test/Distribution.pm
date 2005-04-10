@@ -9,7 +9,7 @@ use ExtUtils::Manifest qw(manicheck maniread);
 use Test::More;
 
 
-our $VERSION = '1.19';
+our $VERSION = '1.20';
 
 our @types = qw/manifest sig use versions prereq pod description podcover/;
 
@@ -648,7 +648,7 @@ This module was inspired by a use.perl.org journal  entry by C<brian d foy> (see
 L<http://use.perl.org/~brian_d_foy/journal/7463>) where he  describes an idea by
 Andy Lester.
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT & LICENSE
 
 Copyright 2002-2003 Marcel GrE<uuml>nauer. All rights reserved.
 
@@ -661,7 +661,7 @@ it under the same terms as Perl itself.
 
 perl(1),   ExtUtils::Manifest(3pm),  File::Find::Rule(3pm),
 Module::CoreList(3pm),       Test::More(3pm),      Test::Pod(3pm),
-Test::Signature(3pm).
+Test::Pod::Coverage(3pm), Test::Signature(3pm).
 
 =cut
 
