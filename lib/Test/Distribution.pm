@@ -9,7 +9,7 @@ use ExtUtils::Manifest qw(manicheck maniread);
 use Test::More;
 
 
-our $VERSION = '1.20';
+our $VERSION = '1.21';
 
 our @types = qw/manifest sig use versions prereq pod description podcover/;
 
@@ -359,14 +359,17 @@ sub run_tests { SKIP: {
 	my $self = shift;
 	return unless $self->num_tests();
 	eval {
-		require Test::Signature;
-		Test::Signature->import;
+		require Module::Signature;
+		Module::Signature->import;
 	};
 	if($@) {
-		skip 'Test::Signature required for this test', $self->num_tests();
+		skip 'Module::Signature required for this test', $self->num_tests();
 	}
 	else {
-		signature_ok();
+		my $ret = Module::Signature::verify();
+    skip "Module::Signature cannot verify", 1 if $ret eq Module::Signature::CANNOT_VERIFY();
+
+    cmp_ok $ret, '==', Module::Signature::SIGNATURE_OK(), "Valid signature";
 	}
 } }
 

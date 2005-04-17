@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name: Test-Distribution
-version: 1.20
+version: 1.21
 author: ~
 abstract: perform tests on all modules of a distribution
 license: perl
@@ -8,42 +8,42 @@ requires:
   ExtUtils::Manifest: 1.43
   File::Find::Rule: 0.03
   Module::CoreList: 1.93
+  Module::Signature: 0
   Test::More: 0.45
   Test::Pod: 0.95
   Test::Pod::Coverage: 0
-  Test::Signature: 0
 provides:
   Test::Distribution:
     file: lib/Test/Distribution.pm
-    version: 1.20
+    version: 1.21
   Test::Distribution::base:
     file: lib/Test/Distribution.pm
-    version: 1.20
+    version: 1.21
   Test::Distribution::description:
     file: lib/Test/Distribution.pm
-    version: 1.20
+    version: 1.21
   Test::Distribution::exports:
     file: lib/Test/Distribution.pm
-    version: 1.20
+    version: 1.21
   Test::Distribution::manifest:
     file: lib/Test/Distribution.pm
-    version: 1.20
+    version: 1.21
   Test::Distribution::pod:
     file: lib/Test/Distribution.pm
-    version: 1.20
+    version: 1.21
   Test::Distribution::podcover:
     file: lib/Test/Distribution.pm
-    version: 1.20
+    version: 1.21
   Test::Distribution::prereq:
     file: lib/Test/Distribution.pm
-    version: 1.20
+    version: 1.21
   Test::Distribution::sig:
     file: lib/Test/Distribution.pm
-    version: 1.20
+    version: 1.21
   Test::Distribution::use:
     file: lib/Test/Distribution.pm
-    version: 1.20
+    version: 1.21
   Test::Distribution::versions:
     file: lib/Test/Distribution.pm
-    version: 1.20
+    version: 1.21
 generated_by: Module::Build version 0.2609

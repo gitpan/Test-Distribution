@@ -1,5 +1,11 @@
 Revision history for Perl extension Test::Distribution.
 
+1.21 - Try to fix one of the windows build errors that some users see by using
+			 Module::Signature directly instead of Test::Signature. Specifically the
+			 use of the CANNOT_VERIFY method - as it seems one can have 
+			 Module::Signature installed without having the software which can 
+			 actually do the verification installed.
+
 1.20 - Minor documentation updates
 
 1.19 - Added Test::Pod::Coverage support
