@@ -9,7 +9,7 @@ use ExtUtils::Manifest qw(manicheck maniread);
 use Test::More;
 
 
-our $VERSION = '1.21';
+our $VERSION = '1.22';
 
 our @types = qw/manifest sig use versions prereq pod description podcover/;
 
@@ -63,7 +63,7 @@ sub run_tests {
 	my %args = %$args;
 
 	our @files = (-f 'MANIFEST')
-	  ? _find_manifest_files('.pm$')
+	  ? _find_manifest_files(qr/\.pm$/)
 	  : File::Find::Rule->file()->name('*.pm')->in($args{dir});
 
 	our @packages = map {

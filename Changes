@@ -1,5 +1,7 @@
 Revision history for Perl extension Test::Distribution.
 
+1.22 - .xpm files are no longer matched as modules
+
 1.21 - Try to fix one of the windows build errors that some users see by using
 			 Module::Signature directly instead of Test::Signature. Specifically the
 			 use of the CANNOT_VERIFY method - as it seems one can have 
