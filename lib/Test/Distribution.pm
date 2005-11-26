@@ -5,11 +5,11 @@ use strict;
 use warnings;
 
 # perl modules
-use ExtUtils::Manifest qw(manicheck maniread);
+use ExtUtils::Manifest qw(manicheck);
 use Test::More;
 
 
-our $VERSION = '1.22';
+our $VERSION = '1.23';
 
 our @types = qw/manifest sig use versions prereq pod description podcover/;
 
@@ -62,9 +62,7 @@ sub run_tests {
 	my $args = shift;
 	my %args = %$args;
 
-	our @files = (-f 'MANIFEST')
-	  ? _find_manifest_files(qr/\.pm$/)
-	  : File::Find::Rule->file()->name('*.pm')->in($args{dir});
+	our @files = File::Find::Rule->file()->name('*.pm')->in($args{dir});
 
 	our @packages = map {
 	    # $_ is like 'blib/lib/Foo/Bar/Baz.pm',
@@ -114,21 +112,6 @@ sub run_tests {
 sub packages  { our @packages }
 sub files     { our @files }
 sub num_tests { our $tests }
-
-sub _find_manifest_files {
-	my($pattern) = @_;
-	return () unless (-f 'MANIFEST');
-
-	my $rh_manifest = maniread();
-
-	my @files;
-
-	foreach my $file (keys %$rh_manifest) {
-		push @files, $file if ($file =~ m/$pattern/);
-	}
-
-	return @files;
-}
 
 package Test::Distribution::base;
 
@@ -655,7 +638,7 @@ Andy Lester.
 
 Copyright 2002-2003 Marcel GrE<uuml>nauer. All rights reserved.
 
-Copyright 2003, Sagar R. Shah, All rights reserved.
+Copyright 2003-2005, Sagar R. Shah, All rights reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

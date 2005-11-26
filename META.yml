@@ -1,6 +1,6 @@
---- #YAML:1.0
+---
 name: Test-Distribution
-version: 1.22
+version: 1.23
 author: ~
 abstract: perform tests on all modules of a distribution
 license: perl
@@ -15,35 +15,35 @@ requires:
 provides:
   Test::Distribution:
     file: lib/Test/Distribution.pm
-    version: 1.22
+    version: 1.23
   Test::Distribution::base:
     file: lib/Test/Distribution.pm
-    version: 1.22
+    version: 1.23
   Test::Distribution::description:
     file: lib/Test/Distribution.pm
-    version: 1.22
+    version: 1.23
   Test::Distribution::exports:
     file: lib/Test/Distribution.pm
-    version: 1.22
+    version: 1.23
   Test::Distribution::manifest:
     file: lib/Test/Distribution.pm
-    version: 1.22
+    version: 1.23
   Test::Distribution::pod:
     file: lib/Test/Distribution.pm
-    version: 1.22
+    version: 1.23
   Test::Distribution::podcover:
     file: lib/Test/Distribution.pm
-    version: 1.22
+    version: 1.23
   Test::Distribution::prereq:
     file: lib/Test/Distribution.pm
-    version: 1.22
+    version: 1.23
   Test::Distribution::sig:
     file: lib/Test/Distribution.pm
-    version: 1.22
+    version: 1.23
   Test::Distribution::use:
     file: lib/Test/Distribution.pm
-    version: 1.22
+    version: 1.23
   Test::Distribution::versions:
     file: lib/Test/Distribution.pm
-    version: 1.22
+    version: 1.23
 generated_by: Module::Build version 0.2609

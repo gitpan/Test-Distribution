@@ -1,5 +1,16 @@
 Revision history for Perl extension Test::Distribution.
 
+1.23 - Stop using the MANIFEST list to find .pm files, just search under lib
+       instead. This prevents T::D from trying to use modules not for install
+			 (e.g. under t/lib) and using them incorrectly!
+
+			 Let me know if you'd like more flexiblity (e.g. to override the search
+			 directory, and if you need to specify multiple search roots). There is a
+			 dir option but it's not public/documented because I think I need to do a
+			 thorough code review to make sure it works properly. As I say, let me
+			 know if you want/need this flexibility and I shall add it to a future
+			 release.
+
 1.22 - .xpm files are no longer matched as modules
 
 1.21 - Try to fix one of the windows build errors that some users see by using
