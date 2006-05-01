@@ -1,9 +1,12 @@
 ---
 name: Test-Distribution
-version: 1.23
-author: ~
+version: 1.24
+author:
+  - 'Marcel GrE<uuml>nauer <marcel@cpan.org>'
 abstract: perform tests on all modules of a distribution
 license: perl
+resources:
+  license: http://dev.perl.org/licenses/
 requires:
   ExtUtils::Manifest: 1.43
   File::Find::Rule: 0.03
@@ -15,35 +18,28 @@ requires:
 provides:
   Test::Distribution:
     file: lib/Test/Distribution.pm
-    version: 1.23
+    version: 1.24
   Test::Distribution::base:
     file: lib/Test/Distribution.pm
-    version: 1.23
   Test::Distribution::description:
     file: lib/Test/Distribution.pm
-    version: 1.23
   Test::Distribution::exports:
     file: lib/Test/Distribution.pm
-    version: 1.23
   Test::Distribution::manifest:
     file: lib/Test/Distribution.pm
-    version: 1.23
   Test::Distribution::pod:
     file: lib/Test/Distribution.pm
-    version: 1.23
   Test::Distribution::podcover:
     file: lib/Test/Distribution.pm
-    version: 1.23
   Test::Distribution::prereq:
     file: lib/Test/Distribution.pm
-    version: 1.23
   Test::Distribution::sig:
     file: lib/Test/Distribution.pm
-    version: 1.23
   Test::Distribution::use:
     file: lib/Test/Distribution.pm
-    version: 1.23
   Test::Distribution::versions:
     file: lib/Test/Distribution.pm
-    version: 1.23
-generated_by: Module::Build version 0.2609
+generated_by: Module::Build version 0.28
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2

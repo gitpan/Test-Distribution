@@ -1,5 +1,8 @@
 Revision history for Perl extension Test::Distribution.
 
+1.24	- Removed message asking users not to log bugs to rt.cpan.org
+        as I do now seem to finally own the bugs queue for this module
+
 1.23 - Stop using the MANIFEST list to find .pm files, just search under lib
        instead. This prevents T::D from trying to use modules not for install
 			 (e.g. under t/lib) and using them incorrectly!

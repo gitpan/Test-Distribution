@@ -9,7 +9,7 @@ use ExtUtils::Manifest qw(manicheck);
 use Test::More;
 
 
-our $VERSION = '1.23';
+our $VERSION = '1.24';
 
 our @types = qw/manifest sig use versions prereq pod description podcover/;
 
@@ -616,11 +616,8 @@ necessary? Unnecessary? Do you have feature requests of your own?
 
 =head1 BUGS
 
-To report a bug  or request an enhancement  DO NOT use CPAN's  excellent Request
-Tracker. As it currently does not support passing ownership  of a bug queue when
-someone else takes over a module (I'm not the original author of this module)
-
-Please email me: sagarshah AT softhome DOT net
+To report a bug  or request an enhancement use CPAN's  excellent Request
+Tracker. 
 
 =head1 AUTHORS
 

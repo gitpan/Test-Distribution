@@ -200,12 +200,8 @@ FEATURE IDEAS
     Unnecessary? Do you have feature requests of your own?
 
 BUGS
-    To report a bug or request an enhancement DO NOT use CPAN's excellent
-    Request Tracker. As it currently does not support passing ownership of a
-    bug queue when someone else takes over a module (I'm not the original
-    author of this module)
-
-    Please email me: sagarshah AT softhome DOT net
+    To report a bug or request an enhancement use CPAN's excellent Request
+    Tracker.
 
 AUTHORS
     Marcel Grünauer <marcel@cpan.org>
