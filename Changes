@@ -1,6 +1,8 @@
 Revision history for Perl extension Test::Distribution.
 
-1.24	- Removed message asking users not to log bugs to rt.cpan.org
+1.25 - Removed Makefile.PL - everyone knows what Module::Build is these days
+
+1.24 - Removed message asking users not to log bugs to rt.cpan.org
         as I do now seem to finally own the bugs queue for this module
 
 1.23 - Stop using the MANIFEST list to find .pm files, just search under lib

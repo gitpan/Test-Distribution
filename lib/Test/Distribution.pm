@@ -9,7 +9,7 @@ use ExtUtils::Manifest qw(manicheck);
 use Test::More;
 
 
-our $VERSION = '1.24';
+our $VERSION = '1.25';
 
 our @types = qw/manifest sig use versions prereq pod description podcover/;
 
