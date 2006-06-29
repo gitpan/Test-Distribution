@@ -2,6 +2,7 @@ package Test::Distribution;
 
 # pragmata
 use strict;
+use vars qw($VERSION @types);
 use warnings;
 
 # perl modules
@@ -9,9 +10,9 @@ use ExtUtils::Manifest qw(manicheck);
 use Test::More;
 
 
-our $VERSION = '1.25';
+$VERSION = '1.26';
 
-our @types = qw/manifest sig use versions prereq pod description podcover/;
+@types = qw/manifest sig use versions prereq pod description podcover/;
 
 my @error;
 for (qw/File::Spec File::Basename File::Find::Rule/) {
@@ -48,7 +49,7 @@ sub import {
 
 	$args{tests} ||= 0;
 
-	$args{dirlist} = [ qw(lib) ];
+	$args{dirlist} = [ qw(blib lib) ];
 	$args{dir}   ||= File::Spec->catfile(@{ $args{dirlist} });
 
 	$args{podcoveropts} ||= {};
@@ -229,7 +230,7 @@ sub num_tests { 4 }
 sub run_tests {
 	my $self = shift;
 	ok(-e, "$_ exists") for qw/MANIFEST README/;
-	ok(-e 'Changes' || -e 'ChangeLog', 'Changes or ChangeLog exists');
+  ok(-e 'Changes' || -e 'ChangeLog' || -e 'Changes.pod' || -e 'ChangeLog.pod', 'Changes(.pod)? or ChangeLog(.pod)? exists');
 	ok(-e 'Build.PL' || -e 'Makefile.PL', 'Build.PL or Makefile.PL exists');
 }
 

@@ -1,5 +1,10 @@
 Revision history for Perl extension Test::Distribution.
 
+1.26 - Stoped using 'our' as this is not supported by Perl pre 5.6.x
+     - Changes.pod or ChangeLog.pod also allowed. (Thanks to Nik Clayton for the suggestion)
+     - Search for .pm files in blib/lib not lib
+     - Build.PL explitly requires a version of Pod::Coverage as Test::Pod::Coverage doesn't and it needs it (at least for the features I'm using). Thanks to Jim Keenan for pointing this out.
+
 1.25 - Removed Makefile.PL - everyone knows what Module::Build is these days
 
 1.24 - Removed message asking users not to log bugs to rt.cpan.org

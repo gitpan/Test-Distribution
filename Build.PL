@@ -11,6 +11,7 @@ Module::Build->new(
 				     'Test::More'         => 0.45,
 				     'Test::Pod'          => 0.95,
 						 'Test::Pod::Coverage'=> 0,
+             'Pod::Coverage'      => 0.17, # Test::Pod::Coverage features that I use need a not very old version of Pod::Coverage. This or 0.15 may be the minimum required.
 				    },
 		   create_readme => 1,
 		   sign          => 1,
