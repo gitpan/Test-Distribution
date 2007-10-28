@@ -10,7 +10,7 @@ use ExtUtils::Manifest qw(manicheck);
 use Test::More;
 
 
-$VERSION = '1.26';
+$VERSION = '1.27';
 
 @types = qw/manifest sig use versions prereq pod description podcover/;
 
@@ -620,6 +620,13 @@ necessary? Unnecessary? Do you have feature requests of your own?
 To report a bug  or request an enhancement use CPAN's  excellent Request
 Tracker. 
 
+=head1 SOURCE AVAILABILITY
+
+This source is part of a SourceForge project which always has the
+latest sources in svn.
+
+http://sourceforge.net/projects/sagar-r-shah/
+
 =head1 AUTHORS
 
 Marcel GrE<uuml>nauer <marcel@cpan.org>
@@ -636,7 +643,7 @@ Andy Lester.
 
 Copyright 2002-2003 Marcel GrE<uuml>nauer. All rights reserved.
 
-Copyright 2003-2005, Sagar R. Shah, All rights reserved.
+Copyright 2003-2007, Sagar R. Shah, All rights reserved.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

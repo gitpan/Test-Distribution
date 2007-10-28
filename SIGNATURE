@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.53.
+signed via the Module::Signature module, version 0.55.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -15,11 +15,11 @@ not run its Makefile.PL or Build.PL.
 Hash: SHA1
 
 SHA1 d1b1ea86dc8eac0798b9c2c6faf07cdacda5d8ff Build.PL
-SHA1 0140fed70dbb810a0ea4f50c5a123dba26532590 Changes
-SHA1 727c0a5b381f4ef5449ba5b416c89c09e8b81a22 MANIFEST
-SHA1 51b9f25945456de9b953c95a4fa6e571afd31362 META.yml
-SHA1 05c4c103490f0eac424b4eca23e0f8598da40319 README
-SHA1 df3e71afef23786c888e072d6a19a8f7eea98c78 lib/Test/Distribution.pm
+SHA1 a762d8cce4ccba6e7038c6e486d1e9de98cfdc2a Changes.pod
+SHA1 ed84bfac0ff9eca22e93b2a81ebdc1e078b41791 MANIFEST
+SHA1 6ac356bd55d28007caf586fd42363c2f93fab3f6 META.yml
+SHA1 ef2bd54d90cf6c58500f99a906a433227b188d74 README
+SHA1 d541a88724016a6efdf8ca0bb063674155b3ea9d lib/Test/Distribution.pm
 SHA1 c6389f4b27ae43219053f4d5055c2f0af8acf762 t/01distribution.t
 SHA1 de941051737507a24ced78e459fe5bfa4d206f09 t/02extra.t
 SHA1 2184318893bc2e38af8f29cafaeb46f432c30fff t/03only_versions.t
@@ -30,9 +30,9 @@ SHA1 552909bf9f7d022001292fc37ad887b489699ddd t/07prereq.t
 SHA1 c36f29211ccc6e8bc7b0af1b25efd03e4f6e2e3a t/08sig.t
 SHA1 3e5dfa0f5782549bac860aa565b2f651a8538f32 t/09only_podcover.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.2.2 (GNU/Linux)
+Version: GnuPG v1.4.6 (GNU/Linux)
 
-iD8DBQFEpFYgbD1fM9M5ytIRAnbtAKC98ABUXKJdqOO0uDqFcf2n/OdQ6QCfWdhn
-i1gHDBykPuLqdXvJvSiUOO8=
-=4/4Z
+iD8DBQFHJNdqbD1fM9M5ytIRAhkuAJ94+2scS+kJF1tCzuUjNzd567/5aACgxDnC
+No27v+xSg+D2I4+EX7FmAqA=
+=ohWx
 -----END PGP SIGNATURE-----
