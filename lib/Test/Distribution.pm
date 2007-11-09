@@ -10,7 +10,7 @@ use ExtUtils::Manifest qw(manicheck);
 use Test::More;
 
 
-$VERSION = '1.27';
+$VERSION = '1.28';
 
 @types = qw/manifest sig use versions prereq pod description podcover/;
 
@@ -63,7 +63,7 @@ sub run_tests {
 	my $args = shift;
 	my %args = %$args;
 
-	our @files = File::Find::Rule->file()->name('*.pm')->in($args{dir});
+	our @files = -d $args{dir} ? File::Find::Rule->file()->name('*.pm')->in($args{dir}) : ();
 
 	our @packages = map {
 	    # $_ is like 'blib/lib/Foo/Bar/Baz.pm',
@@ -645,8 +645,8 @@ Copyright 2002-2003 Marcel GrE<uuml>nauer. All rights reserved.
 
 Copyright 2003-2007, Sagar R. Shah, All rights reserved.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This program  is free software; you can  redistribute it  and/or modify it under
+the same terms as Perl itself.
 
 =head1 SEE ALSO
 

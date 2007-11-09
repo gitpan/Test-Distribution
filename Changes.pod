@@ -1,5 +1,13 @@
 =head1 Revision history for Perl extension Test::Distribution.
 
+=head2 1.28 (svn rev 10)
+
+=over *
+
+=item Support distribtions such as httpd_ctl which have no blib/lib dir
+
+=back
+
 =head2 1.27 (svn rev 4)
 
 =over *
