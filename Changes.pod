@@ -1,5 +1,13 @@
 =head1 Revision history for Perl extension Test::Distribution.
 
+=head2 1.29 (svn rev 19)
+
+=over *
+
+=item Removed SIGNATURE support - the sig fad has gone away, there have been issues with checking sigs on non-windows platforms
+
+=back
+
 =head2 1.28 (svn rev 10)
 
 =over *

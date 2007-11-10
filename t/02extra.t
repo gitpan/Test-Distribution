@@ -4,7 +4,6 @@ ok(1, 'extra test');
 
 # 4 descriptions + 4 * (1 module) + 4 extra + 1 prereq + 1 manifest
 my $number_of_tests = 14;
-$number_of_tests++ if(-f 'SIGNATURE');
 
 is(Test::Distribution::num_tests(), $number_of_tests, 'number of tests');
 

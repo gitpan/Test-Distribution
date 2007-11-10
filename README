@@ -26,7 +26,6 @@ DESCRIPTION
     checks that they all define a $VERSION.
 
     This module also performs a numer of test on the distribution itself. It
-    checks that your files match your SIGNATURE file if you have one. It
     checks that your distribution isn't missing certain 'core' description
     files. It checks to see you havent' missed out listing any
     pre-requisites in Makefile.PL.
@@ -118,10 +117,6 @@ TEST TYPES
 
     `podcover'
         Checks for Pod Coverage
-
-    `sig'
-        If the distribution has a SIGNATURE file, checks the SIGNATURE
-        matches the files.
 
     `use'
         This `use()'s the modules to make sure the load happens ok.
@@ -229,5 +224,5 @@ COPYRIGHT & LICENSE
 SEE ALSO
     perl(1), ExtUtils::Manifest(3pm), File::Find::Rule(3pm),
     Module::CoreList(3pm), Test::More(3pm), Test::Pod(3pm),
-    Test::Pod::Coverage(3pm), Test::Signature(3pm).
+    Test::Pod::Coverage(3pm).
 

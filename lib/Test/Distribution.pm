@@ -10,9 +10,9 @@ use ExtUtils::Manifest qw(manicheck);
 use Test::More;
 
 
-$VERSION = '1.28';
+$VERSION = '1.29';
 
-@types = qw/manifest sig use versions prereq pod description podcover/;
+@types = qw/manifest use versions prereq pod description podcover/;
 
 my @error;
 for (qw/File::Spec File::Basename File::Find::Rule/) {
@@ -330,34 +330,6 @@ sub run_tests {
 	my $self = shift;
 }
 
-
-package Test::Distribution::sig;
-use Test::More;
-our @ISA = 'Test::Distribution::base';
-
-sub num_tests {
-	return (-f 'SIGNATURE') ? 1 : 0;
-}
-
-sub run_tests { SKIP: {
-	my $self = shift;
-	return unless $self->num_tests();
-	eval {
-		require Module::Signature;
-		Module::Signature->import;
-	};
-	if($@) {
-		skip 'Module::Signature required for this test', $self->num_tests();
-	}
-	else {
-		my $ret = Module::Signature::verify();
-    skip "Module::Signature cannot verify", 1 if $ret eq Module::Signature::CANNOT_VERIFY();
-
-    cmp_ok $ret, '==', Module::Signature::SIGNATURE_OK(), "Valid signature";
-	}
-} }
-
-
 1;
 
 __END__
@@ -392,10 +364,10 @@ When using this module in a test script, it goes through all the modules
 in your distribution, checks their POD, checks that they compile ok and
 checks that they all define a  $VERSION.
 
-This module also performs a numer of test on  the distribution itself. It checks
-that your files match your  SIGNATURE file if you  have one. It checks that your
-distribution  isn't missing certain 'core'  description files.  It checks to see
-you havent' missed out listing any pre-requisites in Makefile.PL.
+This module also performs a numer of test on  the distribution itself. It
+checks that your distribution  isn't missing certain 'core'  description files.
+It checks to see you havent' missed out listing any pre-requisites in
+Makefile.PL.
 
 It defines its own testing plan, so you usually don't use it in
 conjunction with other C<Test::*> modules in the same file. It's
@@ -507,11 +479,6 @@ Checks for POD errors in files
 =item C<podcover>
 
 Checks for Pod Coverage
-
-=item C<sig>
-
-If the distribution   has a SIGNATURE  file, checks  the  SIGNATURE matches  the
-files.
 
 =item C<use>
 
@@ -652,7 +619,7 @@ the same terms as Perl itself.
 
 perl(1),   ExtUtils::Manifest(3pm),  File::Find::Rule(3pm),
 Module::CoreList(3pm),       Test::More(3pm),      Test::Pod(3pm),
-Test::Pod::Coverage(3pm), Test::Signature(3pm).
+Test::Pod::Coverage(3pm).
 
 =cut
 
