@@ -13,5 +13,5 @@ Module::Build->new(
         'Pod::Coverage'      => 0.17, # Test::Pod::Coverage features that I use need a not very old version of Pod::Coverage. This or 0.15 may be the minimum required.
     },
     create_readme => 1,
-    add_to_cleanup      => [ 'Test-Distribution-*' ],
+    add_to_cleanup       => [ '*.tar.gz', 'Build', '_build' ],
 )->create_build_script;

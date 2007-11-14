@@ -1,6 +1,6 @@
 ---
 name: Test-Distribution
-version: 1.29
+version: 2.00
 author:
   - 'Marcel GrE<uuml>nauer <marcel@cpan.org>'
 abstract: perform tests on all modules of a distribution
@@ -18,7 +18,7 @@ requires:
 provides:
   Test::Distribution:
     file: lib/Test/Distribution.pm
-    version: 1.29
+    version: 2.00
   Test::Distribution::base:
     file: lib/Test/Distribution.pm
   Test::Distribution::description:
@@ -32,6 +32,8 @@ provides:
   Test::Distribution::podcover:
     file: lib/Test/Distribution.pm
   Test::Distribution::prereq:
+    file: lib/Test/Distribution.pm
+  Test::Distribution::sig:
     file: lib/Test/Distribution.pm
   Test::Distribution::use:
     file: lib/Test/Distribution.pm

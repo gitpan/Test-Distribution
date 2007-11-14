@@ -2,7 +2,7 @@ package Test::Distribution;
 
 # pragmata
 use strict;
-use vars qw($VERSION @types);
+use vars qw($VERSION @default_types @supported_types);
 use warnings;
 
 # perl modules
@@ -10,9 +10,10 @@ use ExtUtils::Manifest qw(manicheck);
 use Test::More;
 
 
-$VERSION = '1.29';
+$VERSION = '2.00';
 
-@types = qw/manifest use versions prereq pod description podcover/;
+@default_types = qw/manifest use versions prereq pod description podcover/;
+@supported_types = qw/manifest use versions prereq pod description podcover sig/;
 
 my @error;
 for (qw/File::Spec File::Basename File::Find::Rule/) {
@@ -40,8 +41,8 @@ sub import {
 	my $pkg = shift;
 	my %args = @_;
 
-	our @types;
-	$args{only} ||= \@types;
+	use vars qw(@default_types);
+	$args{only} ||= \@default_types;
 	$args{only} = [ $args{only} ] unless ref $args{only} eq 'ARRAY';
 
 	$args{not} ||= [];
@@ -91,7 +92,7 @@ sub run_tests {
 	our $tests = $args{tests};
 	for my $type (keys %perform) {
 		die "no such test type: $type\n"
-		    unless grep /^$type$/ => our @types;
+		    unless grep /^$type$/ => our @supported_types;
 
 		my $pkg = __PACKAGE__ . '::' . $type;
 		$testers{$type} = $pkg->new(
@@ -105,7 +106,7 @@ sub run_tests {
 
 	plan tests => $tests;
 
-	for my $type (@types) {
+	for my $type (@supported_types) {
 		$testers{$type}->run_tests($args) if $perform{$type};
 	}
 }
@@ -330,6 +331,31 @@ sub run_tests {
 	my $self = shift;
 }
 
+package Test::Distribution::sig;
+use Test::More;
+our @ISA = 'Test::Distribution::base';
+
+sub num_tests {
+	return (-f 'SIGNATURE') ? 1 : 0;
+}
+
+sub run_tests { SKIP: {
+	my $self = shift;
+	return unless $self->num_tests();
+	eval {
+		require Module::Signature;
+		Module::Signature->import;
+	};
+	if($@) {
+		skip 'Module::Signature required for this test', $self->num_tests();
+	}
+	else {
+		my $ret = Module::Signature::verify();
+    skip "Module::Signature cannot verify", 1 if $ret eq Module::Signature::CANNOT_VERIFY();
+
+    cmp_ok $ret, '==', Module::Signature::SIGNATURE_OK(), "Valid signature";
+	}
+} }
 1;
 
 __END__
@@ -365,14 +391,20 @@ in your distribution, checks their POD, checks that they compile ok and
 checks that they all define a  $VERSION.
 
 This module also performs a numer of test on  the distribution itself. It
-checks that your distribution  isn't missing certain 'core'  description files.
-It checks to see you havent' missed out listing any pre-requisites in
-Makefile.PL.
+checks that your files match your  SIGNATURE file if you  have one. It checks
+that your distribution  isn't missing certain 'core'  description files.  It
+checks to see you havent' missed out listing any pre-requisites in Makefile.PL.
 
 It defines its own testing plan, so you usually don't use it in
 conjunction with other C<Test::*> modules in the same file. It's
 recommended that you just create a one-line test script as shown in the
 SYNOPSIS above. However, there are options...
+
+B<NOTE> If you do not specify any options Test::Distribution will run all test
+types B<except> signature testing which must always be explicitly switched on.
+
+In the future I may change the default to run no tests at all as this sounds
+safer. Mail me if you disagree.
 
 =head1 OPTIONS
 
@@ -394,6 +426,9 @@ the test plan. For example:
 It is important that you don't specify a C<tests> argument when
 using C<Test::More> or other test modules as the plan is handled by
 C<Test::Distribution>.
+
+DEPRECATED FEATURE. I plan to remove this in the future unless I'm contacted by
+someone that says they find this useful.
 
 =item C<only =E<gt> STRING|LIST>
 
@@ -479,6 +514,11 @@ Checks for POD errors in files
 =item C<podcover>
 
 Checks for Pod Coverage
+
+=item C<sig>
+
+If the distribution   has a SIGNATURE  file, checks  the  SIGNATURE matches  the
+files.
 
 =item C<use>
 
@@ -619,7 +659,7 @@ the same terms as Perl itself.
 
 perl(1),   ExtUtils::Manifest(3pm),  File::Find::Rule(3pm),
 Module::CoreList(3pm),       Test::More(3pm),      Test::Pod(3pm),
-Test::Pod::Coverage(3pm).
+Test::Pod::Coverage(3pm), Test::Signature(3pm).
 
 =cut
 

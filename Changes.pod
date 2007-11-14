@@ -1,6 +1,16 @@
-=head1 Revision history for Perl extension Test::Distribution.
+=head1 Revision history for Test::Distribution.
 
-=head2 1.29 (svn rev 19)
+=head2 2.00 (svn rev 29)
+
+=over *
+
+=item SIGNATURE support - back but optional. What i should have done in the first place! Sorry guys!
+
+=item Fixed Changes.pod layout
+
+=back
+
+=head2 1.29 (svn rev 19) - REMOVED FROM CPAN
 
 =over *
 
@@ -48,7 +58,7 @@
 
 =back
 
-=head1 1.24
+=head2 1.24
 
 =over *
 
@@ -56,7 +66,7 @@
 
 =back
 
-=head1 1.23
+=head2 1.23
 
 =over *
 
@@ -65,7 +75,7 @@
 
 =back
 
-=head1 1.22
+=head2 1.22
 
 =over *
 
@@ -73,7 +83,7 @@
 
 =back
 
-=head1 1.21
+=head2 1.21
 
 =over *
 
@@ -82,7 +92,7 @@
 
 =back
 
-=head1 1.20
+=head2 1.20
 
 =over *
 
@@ -90,7 +100,7 @@
 
 =back
 
-=head1 1.19
+=head2 1.19
 
 =over *
 
@@ -98,7 +108,7 @@
 
 =back
 
-=head1 1.18
+=head2 1.18
 
 =over *
 
@@ -110,7 +120,7 @@ Thanks to Steffen Schwigon for both of these changes.
 
 =back
 
-=head1 1.17
+=head2 1.17
 
 =over *
 
@@ -119,7 +129,7 @@ Thanks to Steffen Schwigon for both of these changes.
 
 =back
 
-=head1 1.16
+=head2 1.16
 
 =over *
 
@@ -128,7 +138,7 @@ Thanks to Steffen Schwigon for both of these changes.
 	  
 =back
 
-=head1 1.15
+=head2 1.15
 
 =over *
 
@@ -144,7 +154,7 @@ thanks to patch from Jonas B.Nielsen
 
 =back
 
-=head1 1.14
+=head2 1.14
 
 =over *
 
@@ -155,7 +165,7 @@ It only  requires each package defined a version. The  version does not need to 
 
 =back
 
-=head1 1.13
+=head2 1.13
 
 =over *
 
@@ -163,7 +173,7 @@ It only  requires each package defined a version. The  version does not need to 
 
 =back
 
-=head1 1.12
+=head2 1.12
 
 =over *
 
@@ -174,7 +184,7 @@ Stop gap measure till Test::Prereq has been patched.  (thanks to Paul Hughes aka
 
 =back
 
-=head1 1.11
+=head2 1.11
 
 =over *
 
@@ -187,7 +197,7 @@ Thanks to Paul Hughes aka Barbie
 
 =back
 
-=head1 1.10
+=head2 1.10
 
 =over *
 
@@ -195,7 +205,7 @@ Thanks to Paul Hughes aka Barbie
 
 =back
 
-=head1 1.09
+=head2 1.09
 
 =over *
 
@@ -205,7 +215,7 @@ Thanks to Paul Hughes aka Barbie
 
 =back
 
-=head1 1.08
+=head2 1.08
 
 =over *
 
@@ -217,7 +227,7 @@ This is good because it means module authors who do not want to force their user
 
 =back
 
-=head1 1.07
+=head2 1.07
 
 =over *
 
@@ -232,7 +242,7 @@ hopefully follow in a future version.
 
 =back
 
-=head1 1.06
+=head2 1.06
 
 =over *
 
@@ -248,7 +258,7 @@ hopefully follow in a future version.
 
 =back
 
-=head1 1.05
+=head2 1.05
 
 =over *
 
@@ -258,7 +268,7 @@ hopefully follow in a future version.
 
 =back
 
-=head1 1.04
+=head2 1.04
 
 =over *
 
@@ -266,7 +276,7 @@ hopefully follow in a future version.
 
 =back
 
-=head1 1.03
+=head2 1.03
 
 =over *
 
@@ -284,7 +294,7 @@ hopefully follow in a future version.
 
 =back
 
-=head1 1.02
+=head2 1.02
 
 =over *
 
@@ -292,7 +302,7 @@ hopefully follow in a future version.
 
 =back
 
-=head1 1.01
+=head2 1.01
 
 =over *
 
@@ -300,7 +310,7 @@ hopefully follow in a future version.
 
 =back
 
-=head1 1.00
+=head2 1.00
 
 =over *
 
